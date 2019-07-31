@@ -1,0 +1,10 @@
+# Editor
+.idea
+.DS_*
+
+*.log
+
+# Composer
+vendor/*
+!vendor/.gitkeep
+meta/
