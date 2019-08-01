@@ -45,12 +45,20 @@ if (!function_exists('moj_get_page_uri')) {
  * creates dashboard widgets
  */
 if (!function_exists('moj_dashboard_widgets')) {
-    add_action('wp_dashboard_setup', 'moj_dashboard_widgets');
     function moj_dashboard_widgets()
     {
         global $wp_meta_boxes;
+        
         wp_add_dashboard_widget('moj_support_widget', 'Contact Us', 'moj_dashboard_widget_support_box');
+
+        $normal_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+        
+        $example_widget_backup = array( 'moj_support_widget' => $normal_dashboard['moj_support_widget'] );
+        unset( $normal_dashboard['moj_support_widget'] );
+
+        $wp_meta_boxes['dashboard']['normal']['core'] = array_merge( $example_widget_backup, $normal_dashboard );
     }
+    add_action('wp_dashboard_setup', 'moj_dashboard_widgets');
 }
 
 if (!function_exists('moj_dashboard_widget_support_box')) {
