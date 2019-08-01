@@ -3,7 +3,7 @@
  * Plugin name: WP MoJ Components
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-components
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Ministry of Justice
  * Author URI:  https://peoplefinder.service.gov.uk/people/damien-wilson
  * License:     MIT License
