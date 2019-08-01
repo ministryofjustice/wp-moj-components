@@ -1,0 +1,14 @@
+{
+  "name": "ministryofjustice/wp-moj-components",
+  "description": "A plugin to introduce global functions to a collection of WP sites",
+  "type": "wordpress-plugin",
+  "require": {
+    "composer/installers": "^1.0"
+  },
+  "authors": [
+    {
+      "name": "Damien Wilson",
+      "email": "damien.wilson@digital.justice.gov.uk"
+    }
+  ]
+}
