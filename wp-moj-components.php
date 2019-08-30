@@ -55,14 +55,14 @@ if (!function_exists('moj_dashboard_widgets')) {
 if (!function_exists('moj_dashboard_widget_support_box')) {
     function moj_dashboard_widget_support_box()
     {
-        $image = '<img src="' . esc_url( plugins_url( 'assets/images/moj-dandt.png', __FILE__ ) ) . '" alt="" style="float:left;max-width:80px;height:auto;margin-right:20px" />';
+        $image = '<img src="' . esc_url( plugins_url( 'assets/images/moj-dandt.png', __FILE__ ) )
+            . '" alt="" style="float:left;max-width:80px;height:auto;margin-right:20px" />';
         echo '<div class="wp-clearfix">
                 '.$image.'
-                <p>In collaboration with the content providers, the MOJ "WordPress Gang" technically maintains this website.</p>
-                <p>Need help? Contact us by email: 
-                  <a href="mailto:wordpress@digital.justice.gov.uk">wordpress@digital.justice.gov.uk</a> or on Slack: 
-                  <a href="https://mojdt.slack.com/messages/CH5M67XQB/">wordpress-gang</a>.
-                </p>
+                <p>This website is technically maintained by MoJ Digital & Technology, 
+                   Justice on the Web team @ 102 Petty France, 11.53.</p>
+                <p>Working hours: Monday - Friday 9:00 - 17:00<br/>
+                   Email: wordpress@digital.justice.gov.uk</p>            
               </div>';
     }
 }
