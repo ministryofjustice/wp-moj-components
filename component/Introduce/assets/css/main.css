@@ -1,0 +1,10 @@
+#moj_support_widget .dashicons {
+    color: grey;
+}
+
+#moj_support_widget .dash-widget-image {
+    float:left;
+    max-width:80px;
+    height:auto;
+    margin-right:20px
+}
