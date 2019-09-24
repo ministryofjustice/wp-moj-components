@@ -36,17 +36,27 @@ class Helper
      */
     public function asset_path($path)
     {
-        return esc_url(plugins_url('/assets/', $path));
+        return esc_url(plugins_url('assets/', $path));
     }
 
     public function css_path($path)
     {
-        return $this->asset_path($path) . '/css/';
+        return $this->asset_path($path) . 'css/';
+    }
+
+    public function font_path($path)
+    {
+        return $this->asset_path($path) . 'fonts/';
     }
 
     public function image_path($path)
     {
-        return $this->asset_path($path) . '/images/';
+        return $this->asset_path($path) . 'images/';
+    }
+
+    public function js_path($path)
+    {
+        return $this->asset_path($path) . 'js/';
     }
 }
 

@@ -16,6 +16,10 @@ class Introduce
     public function __construct()
     {
         $this->add_actions();
+
+        $popup = Popup();
+        $popup->parent_path = __FILE__;
+        $popup->init();
     }
 
     private function add_actions()
@@ -53,6 +57,6 @@ class Introduce
 
     public function popup()
     {
-        Popup()->fail();
+
     }
 }
