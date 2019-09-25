@@ -72,7 +72,7 @@ class Popup
                  
                  <div class="intro-notice-copy-wrap">
                     <h3 class="intro-notice-header">' . $first_name . ', did you know?...</h3>
-                    <p class="intro-notice-text">You can find information about technical support for this website <a href="/wp-admin/">in your Dashboard</a></p>
+                    <p class="intro-notice-text">You can find information about <strong><em>technical support</em></strong> for this website <a href="/wp-admin/">in your Dashboard</a></p>
                  </div>
               </div>';
     }
