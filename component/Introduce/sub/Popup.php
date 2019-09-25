@@ -13,8 +13,11 @@ class Popup
 {
     public $parent_path = '';
 
+    public $helper;
+
     public function __construct()
     {
+        $this->helper = new Helper();
     }
 
     public function init()
@@ -24,9 +27,9 @@ class Popup
 
     public function add_action()
     {
-        add_action('wp_ajax_popup_dismissed', array(__CLASS__, 'timer'));
+        add_action('wp_ajax_popup_dismissed', [$this, 'timer']);
 
-        //$this->timer_clear();
+        $this->timer_clear();
 
         if (!get_transient('moj_intro_admin_notice_dismissed')) {
             add_action('admin_enqueue_scripts', [$this, 'enqueue']);
@@ -36,8 +39,7 @@ class Popup
 
     public function enqueue()
     {
-        //wp_enqueue_script('jquery');
-        wp_enqueue_script('intro_admin_popup', Helper()->js_path($this->parent_path) . 'popup.js', array('jquery'),
+        wp_enqueue_script('intro_admin_popup', $this->helper->js_path($this->parent_path) . 'popup.js', array('jquery'),
             '1.0', true);
     }
 
@@ -49,11 +51,11 @@ class Popup
     }
 
     /**
-     * do not show the notice after dismiss for a month
+     * do not show the notice, dismiss for a month
      */
     public function timer()
     {
-        return set_transient('moj_intro_admin_notice_dismissed', true, 30 * DAY_IN_SECONDS);
+        set_transient('moj_intro_admin_notice_dismissed', true, 30 * DAY_IN_SECONDS);
     }
 
     public function timer_clear()

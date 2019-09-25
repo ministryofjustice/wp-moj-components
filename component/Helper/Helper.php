@@ -60,16 +60,12 @@ class Helper
     }
 }
 
-function Helper()
-{
-    return new Helper();
-}
-
 /**
  * backward compat helper function
  */
 function moj_get_page_uri()
 {
-    return Helper()->get_page_uri();
+    $helper = new Helper();
+    return $helper->get_page_uri();
 }
 

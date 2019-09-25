@@ -11,15 +11,18 @@
 
 namespace component;
 
+
 class Introduce
 {
+    private $helper;
+
     public function __construct()
     {
         $this->add_actions();
+        $this->helper = new Helper();
 
-        $popup = Popup();
-        $popup->parent_path = __FILE__;
-        $popup->init();
+        // add popup
+        $this->popup();
     }
 
     private function add_actions()
@@ -30,7 +33,7 @@ class Introduce
 
     public function enqueue_scripts()
     {
-        wp_enqueue_style( 'introduce_admin_css', Helper()->css_path(__FILE__) . 'main.css', []);
+        wp_enqueue_style( 'introduce_admin_css', $this->helper->css_path(__FILE__) . 'main.css', []);
     }
 
     public function dashboard_widgets()
@@ -44,7 +47,7 @@ class Introduce
 
     public function dashboard_widget_support_box()
     {
-        $image = '<img src="' . Helper()->image_path(__FILE__) . 'moj-dandt.png' . '" alt="" class="dash-widget-image" />';
+        $image = '<img src="' . $this->helper->image_path(__FILE__) . 'moj-dandt.png' . '" alt="" class="dash-widget-image" />';
         echo '<div class="wp-clearfix">' . $image . '
                 <p>This website is technically maintained by MoJ Digital & Technology, 
                    Justice on the Web team: </p>
@@ -57,6 +60,8 @@ class Introduce
 
     public function popup()
     {
-
+        $popup = Popup();
+        $popup->parent_path = __FILE__;
+        $popup->init();
     }
 }
