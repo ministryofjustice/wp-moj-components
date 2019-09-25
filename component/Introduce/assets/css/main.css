@@ -8,3 +8,39 @@
     height:auto;
     margin-right:20px
 }
+
+.moj-intro-notice {
+    display: block
+}
+
+.intro-notice-img-wrap {
+    float: left;
+    min-width: 106px;
+}
+
+.intro-notice-copy-wrap {
+    padding-left: 106px;
+}
+
+.intro-notice-header {
+    margin-bottom: 0;
+}
+
+.intro-notice-text {
+    font-size: 1.2em;
+}
+
+.intro-notice-avitar:hover {
+    cursor: pointer;
+    opacity: .8;
+}
+
+@media screen and (max-width: 782px) {
+    .notice, .wrap div.updated, .wrap div.error, .media-upload-form div.error {
+        padding: 10px 10px;
+    }
+
+    .intro-notice-header {
+        margin-top: 8px;
+    }
+}

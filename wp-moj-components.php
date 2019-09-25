@@ -15,10 +15,7 @@ include_once "load.php";
 
 new Helper();
 
-// example helper...
-// Helper()->get_page_uri();
-
-/***************/
+/**********************/
 
 new Versions();
 new Introduce();
