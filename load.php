@@ -34,7 +34,9 @@ function moj_component_load($class_name)
             }
         }
 
-        require_once($path . "/" . basename($class_name) . ".php");
+        if (file_exists($path . "/" . basename($class_name) . ".php")) {
+            require_once($path . "/" . basename($class_name) . ".php");
+        }
     }
 }
 
