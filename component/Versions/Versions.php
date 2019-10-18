@@ -8,32 +8,59 @@
 
 namespace component;
 
+use component\Versions\Plugins as Plugins;
+
 /**
  * Returns version data specific to WordPress.
  */
 class Versions
 {
-    public  function __construct()
+    public $plugins;
+
+    public function __construct()
     {
-        $this->add_actions();
+        $this->actions();
+        $this->plugins();
     }
 
-    private function add_actions()
+    private function actions()
     {
-        add_action('rest_api_init', [$this, 'register_api_endpoint']);
+        add_action('rest_api_init', [$this, 'registerWPVersionApiEndpoint']);
+        add_action('rest_api_init', [$this, 'registerPluginApiEndpoint']);
     }
 
-    public function register_api_endpoint()
+    public function plugins()
     {
-        register_rest_route('moj', '/version', array(
+        $this->plugins = new Plugins();
+    }
+
+    public function registerWPVersionApiEndpoint()
+    {
+        return register_rest_route('moj', '/version', array(
             'methods' => 'GET',
-            'callback' => [$this, 'wp_version']
+            'callback' => [$this, 'wpVersion']
         ));
     }
 
-    public function wp_version()
+    public function registerPluginApiEndpoint()
+    {
+        return register_rest_route('moj', '/plugin-versions', array(
+            'methods' => 'GET',
+            'callback' => [$this, 'pluginVersions']
+        ));
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.CamelCaseVariableName)
+     */
+    public function wpVersion()
     {
         global $wp_version;
         return $wp_version;
+    }
+
+    public function pluginVersions()
+    {
+        return $this->plugins->get();
     }
 }

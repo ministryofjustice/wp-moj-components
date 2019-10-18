@@ -10,5 +10,18 @@
       "name": "Damien Wilson",
       "email": "damien.wilson@digital.justice.gov.uk"
     }
-  ]
+  ],
+    "require-dev": {
+        "10up/wp_mock": "0.4.2",
+        "phpmd/phpmd": "^2.7",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit",
+            "vendor/bin/phpcs -p",
+            "vendor/bin/phpmd component/ text cleancode,codesize,controversial,design,naming,unusedcode"
+        ],
+        "coverage": "vendor/bin/phpunit --coverage-html coverage --whitelist component"
+    }
 }

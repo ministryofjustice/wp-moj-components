@@ -11,6 +11,7 @@
 
 namespace component;
 
+use component\Introduce\Popup as Popup;
 
 class Introduce
 {
@@ -18,36 +19,36 @@ class Introduce
 
     public function __construct()
     {
-        $this->add_actions();
+        $this->actions();
         $this->helper = new Helper();
 
         // add popup
         $this->popup();
     }
 
-    private function add_actions()
+    public function actions()
     {
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
-        add_action('wp_dashboard_setup', [$this, 'dashboard_widgets'], 1);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue']);
+        add_action('wp_dashboard_setup', [$this, 'dashboardWidgets'], 1);
     }
 
-    public function enqueue_scripts()
+    public function enqueue()
     {
-        wp_enqueue_style( 'introduce_admin_css', $this->helper->css_path(__FILE__) . 'main.css', []);
+        wp_enqueue_style('introduce_admin_css', $this->helper->cssPath(__FILE__) . 'main.css', []);
     }
 
-    public function dashboard_widgets()
+    public function dashboardWidgets()
     {
         wp_add_dashboard_widget(
             'moj_support_widget',
             'Contact Us',
-            [$this, 'dashboard_widget_support_box']
+            [$this, 'dashboardWidgetSupportBox']
         );
     }
 
-    public function dashboard_widget_support_box()
+    public function dashboardWidgetSupportBox()
     {
-        $image = '<img src="' . $this->helper->image_path(__FILE__) . 'moj-dandt.png' . '" alt="" class="dash-widget-image" />';
+        $image = '<img src="' . $this->helper->imagePath(__FILE__) . 'moj-dandt.png' . '" alt="" class="dash-widget-image" />';
         echo '<div class="wp-clearfix">' . $image . '
                 <p>This website is technically maintained by MoJ Digital & Technology, 
                    Justice on the Web team: </p>
@@ -60,8 +61,8 @@ class Introduce
 
     public function popup()
     {
-        $popup = Popup();
-        $popup->parent_path = __FILE__;
+        $popup = new Popup();
+        $popup->parentPath = __FILE__;
         $popup->init();
     }
 }

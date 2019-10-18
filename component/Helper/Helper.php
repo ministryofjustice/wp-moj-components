@@ -13,36 +13,63 @@ namespace component;
  */
 class Helper
 {
-    public $asset_path = '';
+    public $assetPath = '';
 
-    public  function __construct()
+    // mail related stuff
+    /**
+     * @var string
+     */
+    public $mailTo = '';
+
+    /**
+     * @var string
+     */
+    public $mailSubject = '';
+
+    /**
+     * @var string
+     */
+    public $mailMessage = '';
+
+    /**
+     * @var array
+     */
+    public $mailHeaders = [];
+
+    /**
+     * @var array
+     */
+    public $adminSettings = [];
+
+
+    public function __construct()
     {
-        $this->add_actions();
+        $this->actions();
     }
 
-    private function add_actions()
+    private function actions()
     {
     }
 
-    public function get_page_uri()
+    /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
+    public function getPageUrl()
     {
         global $wp;
         return home_url($wp->request);
     }
 
-    public function get_time_period()
+    public function getTimePeriod($time = null)
     {
-        if (date("H") < 12) {
-            return "morning";
-
-        } elseif (date("H") > 11 && date("H") < 17) {
-
-            return "afternoon";
-
-        } elseif (date("H") > 16) {
-
-            return "evening";
-
+        $hour = date("H", $time ?: time());
+        switch (true) {
+            case ($hour < 12):
+                return 'morning';
+            case ($hour > 11 && $hour < 17):
+                return 'afternoon';
+            case ($hour > 16):
+                return 'evening';
         }
     }
 
@@ -50,29 +77,98 @@ class Helper
      * @param $path | the path to the assets directory in the given component
      * @return string
      */
-    public function asset_path($path)
+    public function assetPath($path)
     {
         return esc_url(plugins_url('assets/', $path));
     }
 
-    public function css_path($path)
+    public function cssPath($path)
     {
-        return $this->asset_path($path) . 'css/';
+        return $this->assetPath($path) . 'css/';
     }
 
-    public function font_path($path)
+    public function fontPath($path)
     {
-        return $this->asset_path($path) . 'fonts/';
+        return $this->assetPath($path) . 'fonts/';
     }
 
-    public function image_path($path)
+    public function imagePath($path)
     {
-        return $this->asset_path($path) . 'images/';
+        return $this->assetPath($path) . 'images/';
     }
 
-    public function js_path($path)
+    public function jsPath($path)
     {
-        return $this->asset_path($path) . 'js/';
+        return $this->assetPath($path) . 'js/';
+    }
+
+    public function emailPath($path)
+    {
+        return $path . 'email-templates/';
+    }
+
+    /**
+     * @param $object
+     * @param $key
+     *
+     * @return boolean|null
+     */
+    public function setupSettings($object, $key)
+    {
+        if (!$object || !$key) {
+            return false;
+        }
+
+        if (isset($object->hasSettings) && $object->hasSettings === true) {
+            $object->settings = get_option('moj-component-' . strtolower(ltrim(basename($key), "\\")), array());
+            return true;
+        }
+
+        return null;
+    }
+
+    public function initSettings($class)
+    {
+        if (!in_array($class, $this->adminSettings, true)) {
+            array_push($this->adminSettings, $class);
+        }
+    }
+
+    /**
+     *
+     */
+    public function mail()
+    {
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        wp_mail($this->mailTo, $this->mailSubject, $this->mailMessage, $headers);
+    }
+
+    public function splitCamelCase($string)
+    {
+        $regex = '/
+          (?<=[a-z])
+          (?=[A-Z])
+        | (?<=[A-Z])
+          (?=[A-Z][a-z])
+        /x';
+        $array = preg_split($regex, $string);
+        return implode(' ', $array);
+    }
+
+    public function setMailSubject($subject)
+    {
+        $this->mailSubject = $subject;
+    }
+
+    public function setMailMessage($message)
+    {
+        $this->mailMessage = $message;
+    }
+
+    public function setMaiTo($to)
+    {
+        $this->mailTo = $to;
     }
 }
 
@@ -82,6 +178,5 @@ class Helper
 function moj_get_page_uri()
 {
     $helper = new Helper();
-    return $helper->get_page_uri();
+    return $helper->getPageUrl();
 }
-

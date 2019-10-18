@@ -3,6 +3,7 @@
 .DS_*
 
 *.log
+.phpunit.result.cache
 
 # Composer
 vendor/*
