@@ -23,8 +23,10 @@ function moj_component_load($class_name)
             if ($dh = opendir($path_sub)) {
                 while (($file = readdir($dh)) !== false) {
                     if (filetype($path_sub . $file) !== 'dir') {
-                        if (strpos($file, '.php') > 0) {
-                            require_once($path_sub . $file . "");
+                        if (file_exists($path_sub . $file . "")) {
+                            if (strpos($file, '.php') > 0) {
+                                require_once($path_sub . $file . "");
+                            }
                         }
                     }
                 }
