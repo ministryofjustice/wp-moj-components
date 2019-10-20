@@ -8,6 +8,8 @@
 
 namespace component\Introduce;
 
+use component\Introduce\Popup as Popup;
+
 class PopupSettings extends Popup
 {
     public $helper;
