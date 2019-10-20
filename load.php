@@ -17,20 +17,6 @@ function moj_component_load($class_name)
 
     if ($name_space === 'component') {
         $path = __DIR__ . "/" . str_replace("\\", "/", $class_name);
-        $path_sub = $path . "/";
-
-        if (is_dir($path_sub)) {
-            if ($dh = opendir($path_sub)) {
-                while (($file = readdir($dh)) !== false) {
-                    if (filetype($path_sub . $file) !== 'dir') {
-                        if (strpos($file, '.php') > 0) {
-                            require_once($path_sub . $file . "");
-                        }
-                    }
-                }
-                closedir($dh);
-            }
-        }
 
         if (file_exists($path . "/" . basename($class_name) . ".php")) {
             require_once($path . "/" . basename($class_name) . ".php");
