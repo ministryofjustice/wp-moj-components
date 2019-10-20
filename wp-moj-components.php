@@ -12,9 +12,10 @@
 
 namespace component;
 
+require_once('component/Introduce/Popup.php');
+
 include_once "load.php";
 
-require_once('component/Introduce/Popup.php');
 
 global $mojHelper;
 $mojHelper = new Helper();
