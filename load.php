@@ -17,16 +17,14 @@ function moj_component_load($class_name)
 
     if ($name_space === 'component') {
         $path = __DIR__ . "/" . str_replace("\\", "/", $class_name);
-        $path_sub = $path . "/sub/";
+        $path_sub = $path . "/";
 
         if (is_dir($path_sub)) {
             if ($dh = opendir($path_sub)) {
                 while (($file = readdir($dh)) !== false) {
                     if (filetype($path_sub . $file) !== 'dir') {
-                        if (file_exists($path_sub . $file . "")) {
-                            if (strpos($file, '.php') > 0) {
-                                require_once($path_sub . $file . "");
-                            }
+                        if (strpos($file, '.php') > 0) {
+                            require_once($path_sub . $file . "");
                         }
                     }
                 }
