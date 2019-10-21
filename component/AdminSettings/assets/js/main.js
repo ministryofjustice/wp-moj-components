@@ -1,4 +1,14 @@
 jQuery(function ($) {
+
+    /**
+     * This function is a setter and getter. On set it updates the browser history and returns the pathname + search
+     * part of the URL. If no key is provided the funstion returns false. If a key with no value has been given, and
+     * the query string parameter exists, the value is returned.
+     *
+     * @param key
+     * @param value
+     * @returns string|boolean false|pathname + query string
+     */
     function mojQString(key, value)
     {
         var params = new URLSearchParams(window.location.search);
@@ -17,11 +27,13 @@ jQuery(function ($) {
         } else {
             window.history.replaceState({}, '', `${location.pathname}?${params}`);
         }
+
+        return (window.location.pathname + window.location.search);
     }
 
     function setTab(tab)
     {
-        var tabId;
+        var tabId, refererPath;
 
         if (!tab) {
             tab = $('.nav-tab-wrapper a').eq(0);
@@ -41,8 +53,9 @@ jQuery(function ($) {
         $('.moj-component-settings-section').hide();
         $('div#' + tabId).fadeIn();
 
-        //add to query string
-        mojQString('moj-tab', tabId);
+        //add to query string and update _wp_http_referer
+        refererPath = mojQString('moj-tab', tabId);
+        $('input[name="_wp_http_referer"]').val(refererPath);
 
         return false;
     }
@@ -52,7 +65,6 @@ jQuery(function ($) {
         $('.nav-tab-wrapper').on('click', 'a', function (e) {
             e.preventDefault();
 
-            console.log($(this).attr('href'));
             setTab($(this).attr('href'));
             return false;
         });
