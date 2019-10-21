@@ -8,9 +8,7 @@
 
 namespace component\Introduce;
 
-use component\Introduce\Popup as Popup;
-
-class PopupSettings extends Popup
+class PopupSettings extends \component\Introduce\Popup
 {
     public $helper;
 
@@ -18,6 +16,8 @@ class PopupSettings extends Popup
     {
         global $mojHelper;
         $this->helper = $mojHelper;
+
+        //parent::__construct();
     }
 
     public function settings()

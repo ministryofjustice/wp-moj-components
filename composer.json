@@ -23,5 +23,11 @@
             "vendor/bin/phpmd component/ text cleancode,codesize,controversial,design,naming,unusedcode"
         ],
         "coverage": "vendor/bin/phpunit --coverage-html coverage --whitelist component"
+    },
+    "autoload": {
+        "psr-4": {
+            "component\\Introduce\\": "component/Introduce/",
+            "component\\Security\\": "component/Security/"
+        }
     }
 }
