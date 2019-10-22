@@ -53,7 +53,7 @@ jQuery(function ($) {
         $('.moj-component-settings-section').hide();
         $('div#' + tabId).fadeIn();
 
-        //add to query string and update _wp_http_referer
+        // add to query string and update _wp_http_referer
         refererPath = mojQString('moj-tab', tabId);
         $('input[name="_wp_http_referer"]').val(refererPath);
 
