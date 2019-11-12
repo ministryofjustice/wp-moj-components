@@ -48,7 +48,7 @@ class Introduce
 
     public function dashboardWidgetSupportBox()
     {
-        $image = '<img src="' . $this->helper->imagePath(__FILE__) . 'moj-dandt.png' . '" alt="" class="dash-widget-image" />';
+        $image = '<img src="' . $this->helper->imagePath(__FILE__) . 'moj-dt.png' . '" alt="" class="dash-widget-image" />';
         echo '<div class="wp-clearfix">' . $image . '
                 <p>This website is technically maintained by MoJ Digital & Technology, 
                    Justice on the Web team: </p>
