@@ -55,7 +55,7 @@ class Introduce
                 <p>&nbsp;&nbsp;&nbsp;<span class="dashicons dashicons-admin-home" title="Address"></span>&nbsp;&nbsp; 102 Petty France, 11.53.<br>
                 &nbsp;&nbsp;&nbsp;<span class="dashicons dashicons-clock" title="Working Hours"></span>&nbsp;&nbsp; Monday - Friday 9:00 - 17:00<br/>
                    &nbsp;&nbsp;&nbsp;<span class="dashicons dashicons-email" title="Email Address"></span>&nbsp;&nbsp;
-                   <a href="mailto:wordpress@digital.justice.gov.uk">wordpress@digital.justice.gov.uk</a></p>            
+                   <a href="mailto:justice.web@digital.justice.gov.uk">wordpress@digital.justice.gov.uk</a></p>            
               </div>';
     }
 
