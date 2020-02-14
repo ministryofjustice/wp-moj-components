@@ -100,7 +100,7 @@ class UsersSettings extends Users
 
         echo "<select id='user_inactive_schedule' name='moj_component_settings[user_inactive_schedule]'>";
         foreach ($items as $value => $item) {
-            $selected = ($options['user_inactive_schedule'] == $value) ? 'selected="selected"' : '';
+            $selected = ($options['user_inactive_schedule'] == $item['name']) ? 'selected="selected"' : '';
             echo "<option value='" . $item['name'] . "' $selected>" . $item['display'] . "</option>";
         }
         echo "</select>";

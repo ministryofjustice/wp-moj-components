@@ -22,9 +22,9 @@ class Users
 
     public function __construct()
     {
-        // make sure cron can pick this up
         $this->helper = new Helper();
-        $this->addSchedules();
+        // make sure cron can pick this up
+        $this->addSchedule();
         $this->actions();
     }
 
@@ -44,7 +44,7 @@ class Users
 
     public function inactiveUsers()
     {
-        // can we run?
+        // can we run? A setting may have turned off processing.
         $options = get_option('moj_component_settings');
         if (isset($options['user_active_disable']) && $options['user_active_disable'] === 'yes') {
             return false;
@@ -65,18 +65,6 @@ class Users
                 ];
             }
         }
-
-        $inactive_users[] = [
-            'name' => 'Damien',
-            'email' => 'Damien@me.com',
-            'last_login' => date("l jS \of F", time())
-        ];
-
-        $inactive_users[] = [
-            'name' => 'Hazel',
-            'email' => 'hazel@me.com',
-            'last_login' => date("l jS \of F", time())
-        ];
 
         if (!empty($inactive_users)) {
             $message = '';
@@ -132,17 +120,19 @@ class Users
     /**
      * accessed on-load
      */
-    public function addSchedules()
+    public function addSchedule()
     {
         $recurrence = get_option('moj_component_settings', array()); // default to monthly
+        $recurrence = $recurrence['user_inactive_schedule'] ?? 'monthly';
+        $now_recurrence = wp_get_schedule('moj_check_user_activity');
 
-        if ($recurrence !== wp_get_schedule('moj_check_user_activity')) {
-            $recurrence['user_inactive_schedule'] = 'monthly';
+        if ($now_recurrence && $recurrence !== $now_recurrence) {
+            wp_clear_scheduled_hook('moj_check_user_activity');
         }
 
         // schedules
         if (!wp_next_scheduled('moj_check_user_activity')) {
-            wp_schedule_event(time(), $recurrence['user_inactive_schedule'], 'moj_check_user_activity');
+            wp_schedule_event(time(), $recurrence, 'moj_check_user_activity');
         }
     }
 }
