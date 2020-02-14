@@ -49,6 +49,7 @@ class Helper
 
     private function actions()
     {
+        add_filter('cron_schedules', [$this, 'addIntervals']);
     }
 
     /**
@@ -169,6 +170,28 @@ class Helper
     public function setMaiTo($to)
     {
         $this->mailTo = $to;
+    }
+
+    public function addIntervals($schedules)
+    {
+        $schedules['weekly'] = array(
+            'interval' => 604800,
+            'display' => __('Once Weekly')
+        );
+        $schedules['monthly'] = array(
+            'interval' => 2635200,
+            'display' => __('Once Monthly')
+        );
+        $schedules['five_minutes'] = [
+            'interval' => 300,
+            'display' => esc_html__('Every Five Minutes')
+        ];
+        $schedules['three_minutes'] = [
+            'interval' => 180,
+            'display' => esc_html__('Every Three Minutes')
+        ];
+
+        return $schedules;
     }
 }
 

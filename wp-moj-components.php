@@ -17,6 +17,8 @@ require_once('component/Versions/Plugins.php');
 require_once('component/Introduce/PopupSettings.php');
 require_once('component/Security/VulnerabilityDB.php');
 require_once('component/Security/VulnerabilityDBSettings.php');
+require_once('component/Users/Users.php');
+require_once('component/Users/UsersSettings.php');
 
 include_once "load.php";
 
@@ -30,3 +32,4 @@ new AdminSettings();
 new Versions();
 new Introduce();
 new Security();
+new Users();
