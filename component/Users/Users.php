@@ -74,10 +74,16 @@ class Users
             if ($last_login < $three_months_ago) {
                 $inactive_users[] = [
                     'name' => $user->display_name,
-                    'profile' => $this->get_user_profile_url($user->ID),
+                    'profile' => $this->getUserProfileURL($user->ID),
                     'last_login' => date("l jS \of F", $last_login),
                     'source' => get_user_meta($user->ID, $this->last_logged_in_key . '_source', true)
                 ];
+            }
+        }
+
+        if ($options['user_inactive_test']) {
+            foreach ($this->dummyTestData() as $dummy_user) {
+                $inactive_users[] = $dummy_user;
             }
         }
 
@@ -101,7 +107,35 @@ class Users
         }
     }
 
-    public function get_user_profile_url($user_id)
+    private function dummyTestData()
+    {
+        return [
+            [
+                'name' => 'Beverley',
+                'profile' => $this->getUserProfileURL(1),
+                'last_login' => date("l jS \of F", time()),
+                'source' => 'system'
+            ],
+            [
+                'name' => 'Robert',
+                'profile' => $this->getUserProfileURL(2),
+                'last_login' => date("l jS \of F", time()),
+                'source' => 'system'
+            ],
+            [
+                'name' => 'Adam',
+                'profile' => $this->getUserProfileURL(3),
+                'last_login' => date("l jS \of F", time()),
+                'source' => 'user'
+            ],
+        ];
+    }
+
+    /**
+     * @param $user_id
+     * @return string|void
+     */
+    public function getUserProfileURL($user_id)
     {
         return admin_url('user-edit.php?user_id=' . $user_id);
     }

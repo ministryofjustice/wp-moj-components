@@ -50,6 +50,14 @@ class UsersSettings extends Users
             'mojComponentSettings',
             $section
         );
+
+        add_settings_field(
+            'user_inactive_test',
+            __('Test User Inactive?', 'wp-moj-components'),
+            [$this, 'testUserInactivityCheck'],
+            'mojComponentSettings',
+            $section
+        );
     }
 
     public function userEmailAddress()
@@ -77,6 +85,21 @@ class UsersSettings extends Users
                class="moj-component-input-checkbox">
         <p>User activity checks are useful while testing and on production servers. You can switch off the checking
             process here.</p>
+        <?php
+
+        return null;
+    }
+
+    public function testUserInactivityCheck()
+    {
+        $options = get_option('moj_component_settings');
+        ?>
+        <input type='checkbox' name='moj_component_settings[user_inactive_test]'
+               value='yes' <?= checked('yes', $options['user_inactive_test'] ?? '') ?>
+               class="moj-component-input-checkbox">
+        <p>Check this option if you would like to test the Inactivity Check operation. An email with dummy data will be
+            sent to the email address above.<br>
+            Please reduce the schedule time for testing and make sure to reset when satisfied.</p>
         <?php
 
         return null;
