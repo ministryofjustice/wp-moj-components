@@ -18,7 +18,11 @@ class Users
      */
     public $settings;
 
-    public $text_domain = 'moj-comp-user-login';
+    /**
+     * @var string
+     * Underscore at the beginning of key hides name/value from GUI
+     */
+    public $last_logged_in_key = '_moj_comp_user_login';
 
     public function __construct()
     {
@@ -44,7 +48,7 @@ class Users
 
     public function inactiveUsers()
     {
-        // can we run? A setting may have turned off processing.
+        // can we run? A dashboard setting may have turned off processing.
         $options = get_option('moj_component_settings');
         if (isset($options['user_active_disable']) && $options['user_active_disable'] === 'yes') {
             return false;
@@ -55,13 +59,24 @@ class Users
 
         $inactive_users = [];
         foreach ($users as $user) {
-            $last_login = get_user_meta($user->ID, $this->text_domain);
+            $last_login = get_user_meta($user->ID, $this->last_logged_in_key, true);
+            // if no logged in timestamp for user, create one and continue to next user.
+            if ($last_login === '') {
+                update_user_meta($user->ID, $this->last_logged_in_key, time());
+                update_user_meta($user->ID, $this->last_logged_in_key . '_source', 'system');
+                continue;
+            }
+
+            // cast to int
+            $last_login = (int)$last_login;
+
             $three_months_ago = time() - 7776000; // 3 months in seconds
             if ($last_login < $three_months_ago) {
                 $inactive_users[] = [
                     'name' => $user->display_name,
                     'email' => $user->user_email,
-                    'last_login' => date("l jS \of F", $last_login)
+                    'last_login' => date("l jS \of F", $last_login),
+                    'source' => get_user_meta($user->ID, $this->last_logged_in_key . '_source', true)
                 ];
             }
         }
@@ -69,7 +84,7 @@ class Users
         if (!empty($inactive_users)) {
             $message = '';
             foreach ($inactive_users as $user) {
-                $message .= '<a href="mailto:' . $user['email'] . '">' . $user['name'] . '</a> last logged in on ' . $user['last_login'] . '<br>- - -<br>';
+                $message .= '<a href="mailto:' . $user['email'] . '">' . $user['name'] . '</a> last logged in on ' . $user['last_login'] . ' (source: ' . $user['source'] . ')<br>- - -<br>';
             }
 
             $siteName = get_option('blogname');
@@ -114,7 +129,8 @@ class Users
     public function wpLogin($user_login)
     {
         $user = get_user_by('login', $user_login);
-        update_user_meta($user->ID, $this->text_domain, time());
+        update_user_meta($user->ID, $this->last_logged_in_key, time());
+        update_user_meta($user->ID, $this->last_logged_in_key . '_source', 'user');
     }
 
     /**
