@@ -84,6 +84,7 @@ class AdminSettings
         <form action='options.php' method='post'>
 
             <h1>MoJ Component Settings</h1>
+            <p><em>Version <?= MOJ_COMPONENT_VERSION ?></em></p>
 
             <?php
             echo '<h2 class="nav-tab-wrapper">';

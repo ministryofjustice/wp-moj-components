@@ -56,4 +56,24 @@ class Plugins
     {
         return get_option('moj_plugin_versions');
     }
+
+    /**
+     * Get the version of a plugin.
+     * If a plugin file path is not passed, the version will default to this plugin; MoJ Components
+     * @param $plugin_file_path string absolute path to the plugin file needed to extract data.
+     * @return mixed
+     */
+    public function data($plugin_file_path = '')
+    {
+        if ($plugin_file_path === '') {
+            $plugin_file_path = MOJ_COMPONENT_PLUGIN_PATH;
+        }
+
+        if (!function_exists('get_plugin_data')) {
+            require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        }
+
+        $plugin = get_plugin_data($plugin_file_path, false, false);
+        return $plugin['Version'] ?? false;
+    }
 }

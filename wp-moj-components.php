@@ -21,6 +21,7 @@ require_once('component/Users/Users.php');
 require_once('component/Users/UsersSettings.php');
 
 include_once "load.php";
+define('MOJ_COMPONENT_PLUGIN_PATH', __FILE__);
 
 global $mojHelper;
 $mojHelper = new Helper();

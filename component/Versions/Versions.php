@@ -32,6 +32,7 @@ class Versions
     public function plugins()
     {
         $this->plugins = new Plugins();
+        define('MOJ_COMPONENT_VERSION', $this->plugins->data());
     }
 
     public function registerWPVersionApiEndpoint()
