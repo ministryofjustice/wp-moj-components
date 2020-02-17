@@ -81,25 +81,6 @@ class Users
             }
         }
 
-        $inactive_users[] = [
-            'name' => 'Damien Wilson',
-            'profile' => $this->get_user_profile_url(8),
-            'last_login' => date("l jS \of F", time()),
-            'source' => 'system'
-        ];
-        $inactive_users[] = [
-            'name' => 'Isabella',
-            'profile' => $this->get_user_profile_url(5),
-            'last_login' => date("l jS \of F", time()),
-            'source' => 'user'
-        ];
-        $inactive_users[] = [
-            'name' => 'Lucy',
-            'profile' => $this->get_user_profile_url(7),
-            'last_login' => date("l jS \of F", time()),
-            'source' => 'system'
-        ];
-
         if (!empty($inactive_users)) {
             $message = '';
             foreach ($inactive_users as $user) {
