@@ -74,17 +74,37 @@ class Users
             if ($last_login < $three_months_ago) {
                 $inactive_users[] = [
                     'name' => $user->display_name,
-                    'email' => $user->user_email,
+                    'profile' => $this->get_user_profile_url($user->ID),
                     'last_login' => date("l jS \of F", $last_login),
                     'source' => get_user_meta($user->ID, $this->last_logged_in_key . '_source', true)
                 ];
             }
         }
 
+        $inactive_users[] = [
+            'name' => 'Damien Wilson',
+            'profile' => $this->get_user_profile_url(8),
+            'last_login' => date("l jS \of F", time()),
+            'source' => 'system'
+        ];
+        $inactive_users[] = [
+            'name' => 'Isabella',
+            'profile' => $this->get_user_profile_url(5),
+            'last_login' => date("l jS \of F", time()),
+            'source' => 'user'
+        ];
+        $inactive_users[] = [
+            'name' => 'Lucy',
+            'profile' => $this->get_user_profile_url(7),
+            'last_login' => date("l jS \of F", time()),
+            'source' => 'system'
+        ];
+
         if (!empty($inactive_users)) {
             $message = '';
             foreach ($inactive_users as $user) {
-                $message .= '<a href="mailto:' . $user['email'] . '">' . $user['name'] . '</a> last logged in on ' . $user['last_login'] . ' (source: ' . $user['source'] . ')<br>- - -<br>';
+                $source = ' <small style="color:#666666;">(source: ' . $user['source'] . ')</small>';
+                $message .= '<a href="' . $user['profile'] . '" title="Visit profile">' . $user['name'] . '</a> last logged in on ' . $user['last_login'] . $source . '<br>- - -<br>';
             }
 
             $siteName = get_option('blogname');
@@ -100,6 +120,11 @@ class Users
         }
     }
 
+    public function get_user_profile_url($user_id)
+    {
+        return admin_url('user-edit.php?user_id=' . $user_id);
+    }
+
     public function getMailHTML($user_list, $site, $nth_users)
     {
         $emailTemplate = file_get_contents(__DIR__ . '/assets/email-templates/moj-users.html');
@@ -109,7 +134,8 @@ class Users
             '{dt-logo}',
             '{list_of_users}',
             '{nth_users}',
-            '{domain}'
+            '{domain}',
+            '{moj-logo}'
         ];
 
         $replace = [
@@ -117,7 +143,8 @@ class Users
             $this->helper->imagePath(__FILE__) . 'moj-dt.png',
             $user_list,
             $nth_users,
-            get_home_url()
+            get_home_url(),
+            $this->helper->imagePath(__FILE__) . 'moj.png'
         ];
 
         return str_replace($search, $replace, $emailTemplate);

@@ -848,7 +848,7 @@
                                       <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #448C42;">
                                         <tbody><tr>
                                           <td valign="top" class="mcnTextContent" style="padding: 18px;color: #F2F2F2;font-family: Helvetica;font-size: 16px;font-weight: normal;text-align: left;">
-                                            During our inactivity check today we found<strong> {nth_users} users </strong>with aged accounts.
+                                            A recent inactivity check found<strong> {nth_users} users </strong>with aged accounts.
                                           </td>
                                         </tr>
                                         </tbody></table>
@@ -900,10 +900,10 @@
 
                                   <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; font-size: 16px;">
 
-                                    {list_of_users}
+                                    <p style="padding: 0 18px 0 18px;font-family: Helvetica;font-size: 16px;font-weight: normal;text-align: left;">{list_of_users}</p>
                                     <br><br><hr>
-                                    <p style="padding: 18px;color: #F2F2F2;font-family: Helvetica;font-size: 16px;font-weight: normal;text-align: left;">
-                                      Nb. if the source listed against a user above states 'system', this indicates that the user has not logged in since our checking process added them.
+                                    <p style="padding: 22px 18px 0 18px;color: #666666;font-family: Helvetica;font-size: 15px;font-weight: normal;text-align: left;">
+                                      Nb. if source (shown along side a user) states 'system'; this is an indication the user has not logged in since our checking process first started monitoring.
                                     </p>
                                   </td>
                                 </tr>
@@ -963,7 +963,14 @@
                            class="templateContainer">
                       <tr>
                         <td valign="top" class="footerContainer"
-                            style="padding-top:9px; padding-bottom:9px;"></td>
+                            style="padding-top:9px; padding-bottom:9px;">
+                          <p style="padding: 18px;color: #666666;font-family: Helvetica;font-size: 16px;font-weight: normal;text-align: left;">
+                            <img align="center" alt="" src="{moj-logo}"
+                                 width="200"
+                                 style="max-width:200px; padding-bottom: 0; display: inline !important; vertical-align: bottom;"
+                                 class="mcnImage">
+                          </p>
+                        </td>
                       </tr>
                     </table>
                   </td>
