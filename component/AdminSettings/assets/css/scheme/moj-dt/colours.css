@@ -207,15 +207,15 @@ textarea:focus {
 #adminmenu .wp-has-current-submenu.opensub .wp-submenu,
 .folded #adminmenu .wp-has-current-submenu .wp-submenu,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu {
-    background: #2f3030;
+    background: #1f1f1f;
 }
 
 #adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover:after {
-    border-right-color: #2f3030;
+    border-right-color: #1f1f1f;
 }
 
 #adminmenu .wp-submenu .wp-submenu-head {
-    color: #f2f2f2;
+    color: #848484;
 }
 
 #adminmenu .wp-submenu a,
@@ -223,7 +223,7 @@ textarea:focus {
 .folded #adminmenu .wp-has-current-submenu .wp-submenu a,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu a,
 #adminmenu .wp-has-current-submenu.opensub .wp-submenu a {
-    color: #f2f2f2;
+    color: #848484;
 }
 #adminmenu .wp-submenu a:focus, #adminmenu .wp-submenu a:hover,
 #adminmenu .wp-has-current-submenu .wp-submenu a:focus,
@@ -287,7 +287,7 @@ ul#adminmenu > li.current > a.current:after {
 #adminmenu li:hover a .awaiting-mod,
 #adminmenu li.menu-top:hover > a .update-plugins {
     color: #fff;
-    background: #2f3030;
+    background: #1f1f1f;
 }
 
 /* Admin Menu: collapse button */
@@ -339,7 +339,7 @@ ul#adminmenu > li.current > a.current:after {
 #wpadminbar.nojs .ab-top-menu > li.menupop:hover > .ab-item,
 #wpadminbar .ab-top-menu > li.menupop.hover > .ab-item {
     color: #56b3e9;
-    background: #2f3030;
+    background: #1f1f1f;
 }
 
 #wpadminbar:not(.mobile) > #wp-toolbar li:hover span.ab-label,
@@ -357,7 +357,7 @@ ul#adminmenu > li.current > a.current:after {
 
 /* Admin Bar: submenu */
 #wpadminbar .menupop .ab-sub-wrapper {
-    background: #2f3030;
+    background: #1f1f1f;
 }
 
 #wpadminbar .quicklinks .menupop ul.ab-sub-secondary,
@@ -369,7 +369,7 @@ ul#adminmenu > li.current > a.current:after {
 #wpadminbar .quicklinks .menupop ul li a,
 #wpadminbar .quicklinks .menupop.hover ul li a,
 #wpadminbar.nojs .quicklinks .menupop:hover ul li a {
-    color: #f2f2f2;
+    color: #848484;
 }
 
 #wpadminbar .quicklinks li .blavatar,
@@ -456,7 +456,7 @@ ul#adminmenu > li.current > a.current:after {
 }
 
 #wpadminbar #wp-admin-bar-user-info .username {
-    color: #f2f2f2;
+    color: #848484;
 }
 
 /* Pointers */
@@ -554,7 +554,7 @@ div#wp-responsive-toggle a:before {
 }
 
 .wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle a {
-    background: #2f3030;
+    background: #1f1f1f;
 }
 
 .wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle .ab-icon:before {
