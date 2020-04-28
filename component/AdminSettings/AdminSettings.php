@@ -27,6 +27,7 @@ class AdminSettings
         add_action('admin_enqueue_scripts', [$this, 'enqueue']);
         add_action('admin_init', [$this, 'settings'], 11);
         add_action('admin_menu', [$this, 'page']);
+        add_action('admin_init', [$this, 'mojColourSchemes']);
     }
 
     public function enqueue()
@@ -43,6 +44,17 @@ class AdminSettings
             'manage_options',
             'mojComponentSettings',
             [$this, 'content']
+        );
+    }
+
+    public function mojColourSchemes()
+    {
+        # MoJ Digital & Technology
+        wp_admin_css_color(
+            'moj_dt',
+            __('MoJ Digital & Technology', 'wp-moj-components'),
+            $this->helper->cssPath(__FILE__) .'scheme/moj-dt/colours.css',
+            [ '#0b0c0c', '#626a6e', '#2c5d94', '#1d70b8' ]
         );
     }
 
