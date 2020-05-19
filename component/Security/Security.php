@@ -15,22 +15,26 @@ class Security
         global $mojHelper;
         $this->helper = $mojHelper;
 
-        $this->actions();
+        $this->hooks();
         $this->vulndb();
     }
 
-    public function actions()
+    public function hooks()
     {
-        // add_action('admin_enqueue_scripts', [$this, 'enqueue']);
-    }
-
-    public function enqueue()
-    {
-        // wp_enqueue_style('security_admin_css', $this->helper->cssPath(__FILE__) . 'main.css', []);
+        add_filter('sanitize_file_name',  [$this, 'removeFilenameBadChars'], 10);
     }
 
     public static function vulndb()
     {
         return new VulnerabilityDB();
     }
+
+    public static function removeFilenameBadChars($filename) {
+
+        $bad_chars = array( '–', '#', '~', '%', '|', '^', '>', '<', '['. ']', '{', '}');
+        $filename = str_replace($bad_chars, "-", $filename);
+        return $filename;
+
+    }
+
 }
