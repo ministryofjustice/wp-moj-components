@@ -16,12 +16,18 @@ class Security
         $this->helper = $mojHelper;
 
         $this->actions();
+        $this->filters();
         $this->vulndb();
     }
 
     public function actions()
     {
         // add_action('admin_enqueue_scripts', [$this, 'enqueue']);
+    }
+
+    public function filters()
+    {
+        add_filter('sanitize_file_name',  [$this, 'remove_filename_bad_chars'], 10);
     }
 
     public function enqueue()
@@ -33,4 +39,13 @@ class Security
     {
         return new VulnerabilityDB();
     }
+
+    public static function remove_filename_bad_chars($filename) {
+
+        $bad_chars = array('#', '–', '~', '%', '|', '^', '>', '<', '['. ']', '{', '}');
+        $filename = str_replace($bad_chars, "", $filename);
+        return $filename;
+
+    }
+
 }
