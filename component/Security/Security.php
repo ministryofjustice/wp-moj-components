@@ -21,7 +21,7 @@ class Security
 
     public function hooks()
     {
-        add_filter('sanitize_file_name',  [$this, 'remove_filename_bad_chars'], 10);
+        add_filter('sanitize_file_name',  [$this, 'removeFilenameBadChars'], 10);
     }
 
     public static function vulndb()
@@ -29,7 +29,7 @@ class Security
         return new VulnerabilityDB();
     }
 
-    public static function remove_filename_bad_chars($filename) {
+    public static function removeFilenameBadChars($filename) {
 
         $bad_chars = array( '–', '#', '~', '%', '|', '^', '>', '<', '['. ']', '{', '}');
         $filename = str_replace($bad_chars, "-", $filename);
