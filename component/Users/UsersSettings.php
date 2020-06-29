@@ -28,6 +28,14 @@ class UsersSettings extends Users
     public function settingsFields($section)
     {
         add_settings_field(
+            'user_switch_active',
+            __('User Switch Active?', 'wp-moj-components'),
+            [$this, 'userSwitchActiveCheck'],
+            'mojComponentSettings',
+            $section
+        );
+
+        add_settings_field(
             'to_email',
             __('Notification email', 'wp-moj-components'),
             [$this, 'userEmailAddress'],
@@ -58,6 +66,20 @@ class UsersSettings extends Users
             'mojComponentSettings',
             $section
         );
+    }
+
+    public function userSwitchActiveCheck()
+    {
+        $options = get_option('moj_component_settings');
+
+        ?>
+        <input type='checkbox' name='moj_component_settings[user_switch_active]'
+               value='yes' <?= checked('yes', $options['user_switch_active'] ?? '') ?>
+               class="moj-component-input-checkbox">
+
+        <?php
+
+        return null;
     }
 
     public function userEmailAddress()
