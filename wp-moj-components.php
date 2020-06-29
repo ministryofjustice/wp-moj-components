@@ -21,6 +21,7 @@ require_once('component/Users/Users.php');
 require_once('component/Users/UsersSettings.php');
 require_once('component/Users/UserSwitch.php');
 require_once('component/Sitemap/Sitemap.php');
+require_once('component/Sitemap/SitemapSettings.php');
 
 include_once "load.php";
 define('MOJ_COMPONENT_PLUGIN_PATH', __FILE__);
