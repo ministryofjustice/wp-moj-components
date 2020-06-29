@@ -686,7 +686,7 @@ class Sitemap
             }
 
             if (empty($exclude)) {
-                $return .= $this->returnContentTypeTaxonomyItems($is_title_displayed, $display_nofollow, $taxonomy_obj, $wsp_exclude_taxonomy);
+                $return .= $this->returnContentTypeTaxonomyItems($is_title_displayed, $display_nofollow, $taxonomy_obj, $exclude);
             }
 
         }

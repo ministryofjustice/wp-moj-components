@@ -36,3 +36,4 @@ new Versions();
 new Introduce();
 new Security();
 new Users();
+new Sitemap();
