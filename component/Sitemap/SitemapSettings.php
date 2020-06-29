@@ -12,8 +12,6 @@ class SitemapSettings extends Sitemap
     {
         global $mojHelper;
         $this->helper = $mojHelper;
-
-        //parent::__construct();
     }
 
     public function settings()
