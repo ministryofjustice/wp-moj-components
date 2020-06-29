@@ -19,6 +19,7 @@ require_once('component/Security/VulnerabilityDB.php');
 require_once('component/Security/VulnerabilityDBSettings.php');
 require_once('component/Users/Users.php');
 require_once('component/Users/UsersSettings.php');
+require_once('component/Users/UserSwitch.php');
 require_once('component/Sitemap/Sitemap.php');
 
 include_once "load.php";
