@@ -3,6 +3,7 @@
 namespace component;
 
 use component\Users\UsersSettings as Settings;
+use component\Users\UserSwitch as UserSwitch;
 
 class Users
 {
@@ -30,6 +31,13 @@ class Users
         // make sure cron can pick this up
         $this->addSchedule();
         $this->actions();
+
+        $this->userSwitch();
+    }
+
+    public static function userSwitch()
+    {
+        return new UserSwitch();
     }
 
     public function actions()

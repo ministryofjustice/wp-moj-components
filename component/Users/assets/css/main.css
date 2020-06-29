@@ -1,0 +1,64 @@
+#wpadminbar .quicklinks #wp-admin-bar-tikemp_impresonate_user ul li .ab-item {
+    height: auto
+}
+
+#wpadminbar .quicklinks #wp-admin-bar-tikemp_impresonate_user #userswitch_username {
+    height: 22px;
+    font-size: 13px !important;
+    padding: 2px;
+    width: 145px;
+    border-radius: 2px !important;
+    float: left;
+    box-sizing: border-box !important;
+    line-height: 10px;
+}
+
+#userswitch_search {
+    width: auto;
+    box-sizing: border-box
+}
+
+#userswitch_search_submit {
+    height: 22px;
+    padding: 2px;
+    line-height: 1.1;
+    font-size: 13px !important;
+    border: 0 !important;
+    float: right;
+    background-color: #fff !important;
+    border-radius: 2px !important;
+    width: 74px;
+    box-sizing: border-box;
+    color: #000 !important;
+}
+
+#userswitch_usearch_result {
+    width: 100%;
+    max-height: 320px;
+    overflow-y: auto;
+    margin-top: 10px;
+    float: left;
+}
+
+#userswitch_usearch_form {
+    width: 226px
+}
+
+#userswitch_recent_users {
+    width: 100%;
+    float: left;
+}
+
+form#userswitch_usearch_form input[type="text"] {
+    background-color: #fff !important;
+}
+
+#userswitch_settings_wrap {
+    width: 100%;
+    float: left;
+    border-top: 1px solid #ccc;
+}
+
+#wpadminbar .quicklinks .menupop ul li a, #wpadminbar .quicklinks .menupop.hover ul li a {
+    color: #b4b9be;
+}
