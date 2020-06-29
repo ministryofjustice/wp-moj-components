@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: damienwilson
- * Date: 2019-10-10
- * Time: 14:19
- */
 
 namespace component\Sitemap;
 
