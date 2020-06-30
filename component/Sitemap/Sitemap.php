@@ -89,9 +89,14 @@ class Sitemap
         $wsp_is_display_post_multiple_time = false;
         $wsp_exclude_pages = '';
         $wsp_is_exclude_password_protected = '';
+        $options = [];
 
-        $options = get_option('moj_component_settings');
+        $moj_settings = get_option('moj_component_settings');
 
+        //add check if settings array is set (as this requires save on components settings page)
+        if(is_array($moj_settings)){
+            $options = $moj_settings;
+        }
 
         if (array_key_exists('sitemap_exclude_pages', $options)) {
             $wsp_exclude_pages = trim($options['sitemap_exclude_pages']);
@@ -536,7 +541,14 @@ class Sitemap
     public function returnContentTypeCptLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages)
     {
 
-        $options = get_option('moj_component_settings');
+        $options = [];
+
+        $moj_settings = get_option('moj_component_settings');
+
+        //add check if settings array is set (as this requires save on components settings page)
+        if(is_array($moj_settings)){
+            $options = $moj_settings;
+        }
 
         // init
         $return = '';
@@ -656,7 +668,14 @@ class Sitemap
     public function returnContentTypeTaxonomiesLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages)
     {
 
-        $options = get_option('moj_component_settings');
+        $options = [];
+
+        $moj_settings = get_option('moj_component_settings');
+
+        //add check if settings array is set (as this requires save on components settings page)
+        if(is_array($moj_settings)){
+            $options = $moj_settings;
+        }
 
         // init
         $return = '';
