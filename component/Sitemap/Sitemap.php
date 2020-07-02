@@ -625,6 +625,10 @@ class Sitemap
         if ($sort !== null) {
             $args['orderby'] = $sort;
         }
+        else {
+            $args['orderby'] = 'title';
+            $args['order'] = 'ASC';
+        }
 
         // Query to get the current custom post type
         $posts_cpt = get_posts($args);
