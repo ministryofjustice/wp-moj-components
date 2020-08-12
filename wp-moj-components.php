@@ -3,7 +3,7 @@
  * Plugin name: WP MoJ Components
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-components
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.2.2
+ * Version:     3.2.3
  * Author:      Ministry of Justice
  * Text domain: wp-moj-components
  * Author URI:  https://ministryofjustice.github.io/justice-on-the-web/#justice-on-the-web
@@ -22,6 +22,8 @@ require_once('component/Users/UsersSettings.php');
 require_once('component/Users/UserSwitch.php');
 require_once('component/Sitemap/Sitemap.php');
 require_once('component/Sitemap/SitemapSettings.php');
+require_once('component/Analytics/Analytics.php');
+require_once('component/Analytics/AnalyticsSettings.php');
 
 include_once "load.php";
 define('MOJ_COMPONENT_PLUGIN_PATH', __FILE__);
@@ -38,3 +40,4 @@ new Introduce();
 new Security();
 new Users();
 new Sitemap();
+new Analytics();
