@@ -33,13 +33,35 @@ class AnalyticsSettings extends Analytics
     public function gtmAnalyticsId()
     {
         $options = get_option('moj_component_settings');
-
-        $gtm_id = $options['gtm_analytics_id'] ?? '';
+        $googleTagManagerID = $options['gtm_analytics_id'] ?? '';
 
         ?>
         <input type='text' name='moj_component_settings[gtm_analytics_id]'
-               value='<?php echo $gtm_id; ?>' class="moj-component-input">
+        placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleTagManagerID); ?>' 
+        class="moj-component-input">
         <?php
+
+        // Run a few basic checks (mainly for devs in case of C&P typos)
+
+        // Check if empty string stop rest of checks.
+        if ($googleTagManagerID === '') {
+            return;
+        }
+
+        // Remove whitespace, tabs & line ends.
+        $googleTagManagerID = preg_replace('/\s+/', '', $googleTagManagerID);
+
+        // Too many, too few characters
+        if (strlen($googleTagManagerID) != 11) {
+            echo '<div class="notice notice-error settings-error" style="margin-left: 0;">
+            GTM ID might be invalid. Double check the charactor count.</div>';
+        }
+
+        // Check it is a GTM ID (not GA for example)
+        if (!preg_match('/^GTM-/', $googleTagManagerID)) {
+            echo '<div class="notice notice-error settings-error" style="margin-left: 0;">
+            GTM ID might be invalid. ID must start with GTM.</div>';
+        }
     }
 
     public function settingsSectionCB()
