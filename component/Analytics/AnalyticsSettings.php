@@ -31,13 +31,13 @@ class AnalyticsSettings extends Analytics
     }
 
     /**
-     * Function that collects inputed GTM ID and running checks on it
+     * Function that collects inputed GTM ID and running checks on it.
      */
     public function setGoogleTagManagerID()
     {
         $options = get_option('moj_component_settings');
         $googleTagManagerID = $options['gtm_analytics_id'] ?? '';
-        
+
         ?>
         <input type='text' name='moj_component_settings[gtm_analytics_id]'
         placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleTagManagerID); ?>' 
