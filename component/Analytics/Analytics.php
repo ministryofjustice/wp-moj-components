@@ -40,8 +40,8 @@ class Analytics
     public function actions()
     {
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
-        add_action('wp_head',[$this,'loadGTMCodeHead']);
-        add_action('wp_body_open',[$this,'loadGTMCodeBody']);
+        add_action('wp_head',[$this,'loadGoogleTagManagerInHead']);
+        add_action('wp_body_open',[$this,'loadGoogleTagManagerInBody']);
     }
 
     /**
@@ -49,7 +49,7 @@ class Analytics
      *
      * https://developers.google.com/tag-manager/quickstart
      */
-    public function loadGTMCodeHead() {
+    public function loadGoogleTagManagerInHead() {
 
         // We only want to display GTM code when an ID has been entered.
         if (!empty($this->googleTagManagerID)) {
@@ -65,7 +65,7 @@ class Analytics
         }
     }
 
-    public function loadGTMCodeBody() {
+    public function loadGoogleTagManagerInBody() {
         if (!empty($this->googleTagManagerID)) {
             ?>
                 <!-- Google Tag Manager (noscript) -->
