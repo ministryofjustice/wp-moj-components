@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -39,7 +40,8 @@ class Versions
     {
         return register_rest_route('moj', '/version', array(
             'methods' => 'GET',
-            'callback' => [$this, 'wpVersion']
+            'callback' => [$this, 'wpVersion'],
+            'permission_callback' => '__return_true'
         ));
     }
 
@@ -47,7 +49,8 @@ class Versions
     {
         return register_rest_route('moj', '/plugin-versions', array(
             'methods' => 'GET',
-            'callback' => [$this, 'pluginVersions']
+            'callback' => [$this, 'pluginVersions'],
+            'permission_callback' => '__return_true'
         ));
     }
 
