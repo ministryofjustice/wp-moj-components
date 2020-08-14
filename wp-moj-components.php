@@ -11,7 +11,7 @@
  * Plugin name: WP MoJ Components
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-components
  * Description: Introduces functions that are commonly used across the MoJ network of sites
- * Version:     3.2.3
+ * Version:     3.3.0
  * Author:      Ministry of Justice
  * Text domain: wp-moj-components
  * Author URI:  https://ministryofjustice.github.io/justice-on-the-web/#justice-on-the-web
