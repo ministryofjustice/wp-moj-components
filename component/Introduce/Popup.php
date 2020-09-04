@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -131,8 +132,7 @@ class Popup
         $firstName = (empty($this->getUser()->user_firstname) ? 'Good ' . $this->helper->getTimePeriod() : 'Hey ' . $this->getUser()->user_firstname);
         $avatar = get_avatar_url($this->getUser()->ID, ['size' => '88']);
 
-        if (!current_user_can('administrator'))
-        {
+        if (!current_user_can('administrator')) {
             echo '<div class="moj-intro-notice update-nag notice is-dismissible">
 
             <div class="intro-notice-img-wrap">
@@ -145,7 +145,6 @@ class Popup
             </div>
          </div>';
         }
-
     }
 
     /**
