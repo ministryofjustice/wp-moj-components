@@ -27,7 +27,9 @@ class Users
 
     public function __construct()
     {
-        $this->helper = new Helper();
+        global $mojHelper;
+        $this->helper = $mojHelper;
+
         // make sure cron can pick this up
         $this->addSchedule();
         $this->actions();

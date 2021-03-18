@@ -20,8 +20,11 @@ class Introduce
 
     public function __construct()
     {
+        global $mojHelper;
+        $this->helper = $mojHelper;
+
         $this->actions();
-        $this->helper = new Helper();
+
 
         // add popup
         $this->popup();
