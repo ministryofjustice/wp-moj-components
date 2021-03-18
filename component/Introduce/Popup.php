@@ -6,9 +6,9 @@
  * Time: 15:31
  */
 
-namespace component\Introduce;
+namespace MOJComponents\Introduce;
 
-use component\Introduce\PopupSettings as Settings;
+use MOJComponents\Introduce\PopupSettings as Settings;
 
 /**
  * Suppress all rules containing TooManyPublicMethods in this

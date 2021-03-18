@@ -1,6 +1,6 @@
 <?php
 
-namespace component\Versions;
+namespace MOJComponents\Versions;
 
 class Plugins
 {

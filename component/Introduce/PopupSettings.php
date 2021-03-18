@@ -6,9 +6,11 @@
  * Time: 14:19
  */
 
-namespace component\Introduce;
+namespace MOJComponents\Introduce;
 
-class PopupSettings extends \component\Introduce\Popup
+use MOJComponents\Introduce\Popup as Popup;
+
+class PopupSettings extends Popup
 {
     public $helper;
 

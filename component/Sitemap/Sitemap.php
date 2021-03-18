@@ -1,8 +1,8 @@
 <?php
 
-namespace component;
+namespace MOJComponents\Sitemap;
 
-use component\Sitemap\SitemapSettings as Settings;
+use MOJComponents\Sitemap\SitemapSettings as Settings;
 
 class Sitemap
 {

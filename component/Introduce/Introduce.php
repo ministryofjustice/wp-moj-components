@@ -9,9 +9,10 @@
  * This class includes a dashboard widget and a popup
  */
 
-namespace component;
+namespace MOJComponents\Introduce;
 
-use component\Introduce\Popup as Popup;
+use MOJComponents\Helper;
+use MOJComponents\Introduce\Popup as Popup;
 
 class Introduce
 {

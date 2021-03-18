@@ -1,8 +1,8 @@
 <?php
 
-namespace component;
+namespace MOJComponents\Security;
 
-use component\Security\VulnerabilityDB as VulnerabilityDB;
+use MOJComponents\Security\VulnerabilityDB as VulnerabilityDB;
 
 class Security
 {

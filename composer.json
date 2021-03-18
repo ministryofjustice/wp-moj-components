@@ -26,8 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "component\\Introduce\\": "component/Introduce/",
-            "component\\Security\\": "component/Security/"
+            "MOJComponents\\AdminSettings\\": "component/AdminSettings/",
+            "MOJComponents\\Analytics\\": "component/Analytics/",
+            "MOJComponents\\Introduce\\": "component/Introduce/",
+            "MOJComponents\\Security\\": "component/Security/",
+            "MOJComponents\\Sitemap\\": "component/Sitemap/",
+            "MOJComponents\\Users\\": "component/Users/",
+            "MOJComponents\\Versions\\": "component/Versions/"
         }
     }
 }

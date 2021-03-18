@@ -6,7 +6,7 @@
  * Time: 13:56
  */
 
-namespace component;
+namespace MOJComponents;
 
 /**
  * Contains useful methods

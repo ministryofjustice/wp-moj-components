@@ -1,9 +1,9 @@
 <?php
 
-namespace component;
+namespace MOJComponents\Users;
 
-use component\Users\UsersSettings as Settings;
-use component\Users\UserSwitch as UserSwitch;
+use MOJComponents\Users\UsersSettings as Settings;
+use MOJComponents\Users\UserSwitch as UserSwitch;
 
 class Users
 {

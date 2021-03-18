@@ -1,8 +1,6 @@
 <?php
 
-namespace component\Users;
-
-use component\Users as Users;
+namespace MOJComponents\Users;
 
 class UsersSettings extends Users
 {

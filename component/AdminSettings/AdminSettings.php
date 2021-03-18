@@ -6,7 +6,7 @@
  * Time: 11:34
  */
 
-namespace component;
+namespace MOJComponents\AdminSettings;
 
 class AdminSettings
 {
