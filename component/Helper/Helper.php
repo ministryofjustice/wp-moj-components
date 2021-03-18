@@ -6,7 +6,7 @@
  * Time: 13:56
  */
 
-namespace MOJComponents;
+namespace MOJComponents\Helper;
 
 /**
  * Contains useful methods

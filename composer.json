@@ -27,6 +27,7 @@
     "autoload": {
         "psr-4": {
             "MOJComponents\\AdminSettings\\": "component/AdminSettings/",
+            "MOJComponents\\Helper\\": "component/Helper/",
             "MOJComponents\\Analytics\\": "component/Analytics/",
             "MOJComponents\\Introduce\\": "component/Introduce/",
             "MOJComponents\\Security\\": "component/Security/",

@@ -24,6 +24,7 @@ namespace MOJComponents;
 
 defined('ABSPATH') || exit;
 
+use MOJComponents\Helper\Helper;
 use MOJComponents\AdminSettings\AdminSettings;
 use MOJComponents\Introduce\Introduce;
 use MOJComponents\Versions\Versions;
