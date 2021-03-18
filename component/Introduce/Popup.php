@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -126,22 +127,29 @@ class Popup
         );
     }
 
-    public function content()
+    public function content($forceDisplay = false)
     {
-        $firstName = (empty($this->getUser()->user_firstname) ? 'Good ' . $this->helper->getTimePeriod() : 'Hey ' . $this->getUser()->user_firstname);
-        $avatar = get_avatar_url($this->getUser()->ID, ['size' => '88']);
+        if ($forceDisplay || !current_user_can('administrator')) {
+            $firstName = (
+            empty($this->getUser()->user_firstname)
+                ? 'Good ' . $this->helper->getTimePeriod()
+                : 'Hey ' . $this->getUser()->user_firstname
+            );
 
-        echo '<div class="moj-intro-notice update-nag notice is-dismissible">
+            $avatar = get_avatar_url($this->getUser()->ID, ['size' => '88']);
 
-                 <div class="intro-notice-img-wrap">
-                    <a href="/wp/wp-admin/profile.php" title="View My Profile"><img src="' . $avatar . '" alt="" class="intro-notice-avitar" /></a>
-                 </div>
-                 
-                 <div class="intro-notice-copy-wrap">
+            echo '<div class="moj-intro-notice notice-success update-nag notice is-dismissible">
+                <div class="intro-notice-img-wrap">
+                    <a href="/wp/wp-admin/profile.php" title="View My Profile">
+                        <img src="' . $avatar . '" alt="" class="intro-notice-avitar" />
+                    </a>
+                </div>
+                <div class="intro-notice-copy-wrap">
                     <h3 class="intro-notice-header">' . $firstName . ', ' . $this->getMessageTitle() . '</h3>
                     <p class="intro-notice-text">' . $this->getMessageBody() . '</p>
-                 </div>
-              </div>';
+                </div>
+            </div>';
+        }
     }
 
     /**

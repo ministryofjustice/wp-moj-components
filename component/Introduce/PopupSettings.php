@@ -73,8 +73,14 @@ class PopupSettings extends Popup
     public function settingsSectionCB()
     {
         echo __(
-            'Enter a title and message here that will appear in the notification banner. Once you save your changes the banner will display.',
+            'Enter a title and message here that will appear in the notification banner. Check your layout in the example below.',
             'wp-moj-components'
         );
+
+        // load messages
+        $this->messages();
+
+        // output sample banner
+        echo $this->content(true);
     }
 }
