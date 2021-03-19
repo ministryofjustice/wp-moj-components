@@ -58,7 +58,6 @@ class Popup
     {
         global $mojHelper;
         $this->helper = $mojHelper;
-
         $this->settings = new Settings();
     }
 

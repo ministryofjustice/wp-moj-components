@@ -32,6 +32,7 @@ use MOJComponents\Security\Security;
 use MOJComponents\Users\Users;
 use MOJComponents\Sitemap\Sitemap;
 use MOJComponents\Analytics\Analytics;
+use MOJComponents\Multisite\Multisite;
 
 define('MOJ_COMPONENT_PLUGIN_PATH', __FILE__);
 
@@ -40,7 +41,9 @@ $mojHelper = new Helper();
 
 new AdminSettings();
 
-/**********************/
+/*********
+ * Load Components
+ ******************/
 
 new Versions();
 new Introduce();
@@ -48,3 +51,4 @@ new Security();
 new Users();
 new Sitemap();
 new Analytics();
+new Multisite();
