@@ -2,8 +2,6 @@
 
 namespace MOJComponents\Multisite;
 
-use MOJComponents\Multisite\DomainTracker as DomainTracker;
-
 class Multisite
 {
     public function __construct()
