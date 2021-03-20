@@ -9,8 +9,6 @@
 
 namespace MOJComponents\Introduce;
 
-use MOJComponents\Introduce\PopupSettings as Settings;
-
 /**
  * Suppress all rules containing TooManyPublicMethods in this
  * class
@@ -58,7 +56,7 @@ class Popup
     {
         global $mojHelper;
         $this->helper = $mojHelper;
-        $this->settings = new Settings();
+        $this->settings = new PopupSettings();
     }
 
     public function init()
@@ -129,7 +127,7 @@ class Popup
     public function content($forceDisplay = false)
     {
         if ($forceDisplay || !current_user_can('administrator')) {
-            $firstName = (
+            $greeting = (
             empty($this->getUser()->user_firstname)
                 ? 'Good ' . $this->helper->getTimePeriod()
                 : 'Hey ' . $this->getUser()->user_firstname
@@ -144,7 +142,7 @@ class Popup
                     </a>
                 </div>
                 <div class="intro-notice-copy-wrap">
-                    <h3 class="intro-notice-header">' . $firstName . ', ' . $this->getMessageTitle() . '</h3>
+                    <h3 class="intro-notice-header">' . $greeting . ', ' . $this->getMessageTitle() . '</h3>
                     <p class="intro-notice-text">' . $this->getMessageBody() . '</p>
                 </div>
             </div>';

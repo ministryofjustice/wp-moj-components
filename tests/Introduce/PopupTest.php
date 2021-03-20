@@ -6,9 +6,8 @@
  * Time: 16:16
  */
 
-namespace MOJComponents;
+namespace MOJComponents\Introduce;
 
-use MOJComponents\AdminSettings\Security\Introduce\Analytics\Versions\Introduce\Popup;
 use WP_Mock;
 
 class PopupTest extends WP_Mock\Tools\TestCase

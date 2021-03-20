@@ -1,6 +1,6 @@
 <?php
 
-namespace MOJComponents;
+namespace MOJComponents\Security;
 
 use WP_Mock;
 
