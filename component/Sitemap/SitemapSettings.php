@@ -2,8 +2,6 @@
 
 namespace MOJComponents\Sitemap;
 
-use MOJComponents\Sitemap\Sitemap as Sitemap;
-
 class SitemapSettings extends Sitemap
 {
     public $helper;

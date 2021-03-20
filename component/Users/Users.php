@@ -2,9 +2,6 @@
 
 namespace MOJComponents\Users;
 
-use MOJComponents\Users\UsersSettings as Settings;
-use MOJComponents\Users\UserSwitch as UserSwitch;
-
 class Users
 {
     private $helper;
@@ -49,7 +46,7 @@ class Users
         add_action('moj_check_user_activity', [$this, 'inactiveUsers']);
 
         // settings section
-        add_action('wp_loaded', [new Settings(), 'settings'], 1);
+        add_action('wp_loaded', [new UsersSettings(), 'settings'], 1);
     }
 
     public function enqueue()

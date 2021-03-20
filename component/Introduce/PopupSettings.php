@@ -8,8 +8,6 @@
 
 namespace MOJComponents\Introduce;
 
-use MOJComponents\Introduce\Popup as Popup;
-
 class PopupSettings extends Popup
 {
     public $helper;

@@ -9,8 +9,6 @@
 
 namespace MOJComponents\Versions;
 
-use MOJComponents\Versions\Plugins as Plugins;
-
 /**
  * Returns version data specific to WordPress.
  */

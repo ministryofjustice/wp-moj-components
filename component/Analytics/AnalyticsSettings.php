@@ -2,8 +2,6 @@
 
 namespace MOJComponents\Analytics;
 
-use MOJComponents\Analytics\Analytics as Analytics;
-
 class AnalyticsSettings extends Analytics
 {
     public $helper;
