@@ -11,8 +11,6 @@
 
 namespace MOJComponents\Introduce;
 
-use MOJComponents\Introduce\Popup as Popup;
-
 class Introduce
 {
     private $helper;
