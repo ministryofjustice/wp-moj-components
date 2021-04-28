@@ -2,15 +2,12 @@
 
 namespace MOJComponents\Sitemap;
 
-use MOJComponents\Sitemap\SitemapSettings as Settings;
-
 class Sitemap
 {
     /**
      * @var string
      */
     public $parentPath = '';
-
 
     /**
      * @var boolean
@@ -24,8 +21,7 @@ class Sitemap
 
     public function __construct()
     {
-
-        $this->settings = new Settings();
+        $this->settings = new SitemapSettings();
 
         $this->actions();
 
@@ -43,7 +39,7 @@ class Sitemap
      *
      * @param $atts
      * @param $content
-     * @return str $return
+     * @return string
      */
     public function shortcodeMainFunc($atts, $content = null)
     {
@@ -55,11 +51,10 @@ class Sitemap
      *
      * @param $atts
      * @param $content
-     * @return str $return
+     * @return string $return
      */
     public function buildSitemap($atts, $content = null)
     {
-
         // init
         $return = '';
 
@@ -84,26 +79,23 @@ class Sitemap
         $order = (isset($atts['order']) ? sanitize_text_field($atts['order']) : null);
 
         // Exclude some pages (separated by a coma)
-
         $wsp_add_nofollow = false;
         $wsp_is_display_post_multiple_time = false;
         $wsp_exclude_pages = '';
-        $wsp_is_exclude_password_protected = '';
         $options = [];
 
         $moj_settings = get_option('moj_component_settings');
 
         //add check if settings array is set (as this requires save on components settings page)
-        if(is_array($moj_settings)){
+        if (is_array($moj_settings)) {
             $options = $moj_settings;
         }
 
         if (array_key_exists('sitemap_exclude_pages', $options)) {
             $wsp_exclude_pages = trim($options['sitemap_exclude_pages']);
         }
-        if (array_key_exists('sitemap_exclude_password_protected', $options)) {
-            $wsp_is_exclude_password_protected = $options['sitemap_exclude_password_protected'];
-        }
+        
+        $wsp_is_exclude_password_protected = $options['sitemap_exclude_password_protected'] ?? '';
 
         // Determine if the posts should be displayed multiple time if it is in multiple category
         $display_post_only_once = ($wsp_is_display_post_multiple_time == 1 ? false : true);
@@ -135,62 +127,56 @@ class Sitemap
         }
 
         // check if the attribute "only" is used
+        $return = null;
         switch ($only_cpt) {
-            // display only PAGE
             case 'page':
-                return $this->returnContentTypePage($is_title_displayed, $is_get_only_private, $display_nofollow, $wsp_exclude_pages, $sort);
+                $return = $this->returnContentTypePage($is_title_displayed, $is_get_only_private, $display_nofollow, $wsp_exclude_pages, $sort);
                 break;
-            // display only POST
             case 'post':
-                return $this->returnContentTypePost($is_title_displayed, $display_nofollow, $display_post_only_once, $is_category_title_wording_displayed,
-                    $wsp_exclude_pages, $sort, $sort, $order);
+                $return = $this->returnContentTypePost($is_title_displayed, $display_nofollow, $wsp_exclude_pages);
                 break;
-            // display only ARCHIVE
             case 'archive':
-                return $this->returnContentTypeArchive($is_title_displayed, $display_nofollow);
+                $return = $this->returnContentTypeArchive($is_title_displayed, $display_nofollow);
                 break;
-            // display only AUTHOR
             case 'author':
-                return $this->returnContentTypeAuthor($is_title_displayed, $display_nofollow, $sort);
+                $return = $this->returnContentTypeAuthor($is_title_displayed, $display_nofollow, $sort);
                 break;
-            // display only CATEGORY
             case 'category':
-                return $this->returnContentTypeCategories($is_title_displayed, $display_nofollow, $sort);
+                $return = $this->returnContentTypeCategories($is_title_displayed, $display_nofollow, $sort);
                 break;
-            // display only TAGS
             case 'tag':
-                return $this->returnContentTypeTag($is_title_displayed, $display_nofollow);
+                $return = $this->returnContentTypeTag($is_title_displayed, $display_nofollow);
                 break;
-            // empty
             case '':
-                // nothing but do
+                // nothing to do
                 break;
             default:
                 // check if it's the name of a CPT
-
                 // extract CPT object
                 $cpt = get_post_type_object($only_cpt);
 
                 if (!empty($cpt)) {
-
-                    return $this->returnContentTypeCptItems($is_title_displayed, $display_nofollow, $cpt, $only_cpt, $wsp_exclude_pages, $sort);
+                    $return = $this->returnContentTypeCptItems($is_title_displayed, $display_nofollow, $cpt, $only_cpt, $wsp_exclude_pages, $sort);
                 }
 
                 // check if it's a taxonomy
                 $taxonomy_obj = get_taxonomy($only_cpt);
 
                 if (!empty($taxonomy_obj)) {
-                    return $this->returnContentTypeTaxonomyItems($is_title_displayed, $display_nofollow, $taxonomy_obj, $wsp_exclude_pages);
+                    $return = $this->returnContentTypeTaxonomyItems($is_title_displayed, $display_nofollow, $taxonomy_obj, $wsp_exclude_pages);
                 }
             // end
         }
-
+        
+        if ($return) {
+            return $return;
+        }
 
         //===============================================
-        // Otherwise, display traditionnal sitemap
+        // Otherwise, display traditional sitemap
         //===============================================
 
-        // exclude some custome post type (page, post, archive or author)
+        // exclude some custom post type (page, post, archive or author)
         // value : 0=do not exclude ; 1=exclude
         $wsp_exclude_cpt_page = "";
         $wsp_exclude_cpt_post = "";
@@ -221,8 +207,7 @@ class Sitemap
 
         // List the POSTS by CATEGORY
         if (empty($wsp_exclude_cpt_post)) {
-            $return .= $this->returnContentTypePost($is_title_displayed, $display_nofollow, $display_post_only_once, $is_category_title_wording_displayed,
-                $wsp_exclude_pages);
+            $return .= $this->returnContentTypePost($is_title_displayed, $display_post_only_once, $is_category_title_wording_displayed, $wsp_exclude_pages);
         }
 
         // List the CPT
@@ -249,15 +234,12 @@ class Sitemap
      * Return list of posts
      *
      * @param bool $is_title_displayed
-     * @param bool $is_get_only_private
      * @param bool $display_nofollow
      * @param array $wsp_exclude_pages
-     * @param str $sort
-     * @return str $return
+     * @return string $return
      */
-    public function returnContentTypePost($is_title_displayed = true, $is_get_only_private = false, $display_nofollow = false, $wsp_exclude_pages = array())
+    public function returnContentTypePost($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages = array())
     {
-
         // init
         $return = '';
 
@@ -303,8 +285,8 @@ class Sitemap
      * @param bool $is_get_only_private
      * @param bool $display_nofollow
      * @param array $wsp_exclude_pages
-     * @param str $sort
-     * @return str $return
+     * @param string $sort
+     * @return string $return
      */
     public function returnContentTypePage($is_title_displayed = true, $is_get_only_private = false, $display_nofollow = false, $wsp_exclude_pages = array(), $sort = null)
     {
@@ -360,7 +342,7 @@ class Sitemap
      * Return list of posts in the categories
      *
      * @param bool $is_title_displayed
-     * @return str $return
+     * @return string $return
      */
     public function returnContentTypeCategories($is_title_displayed = true, $display_nofollow = false, $sort = null)
     {
@@ -406,7 +388,7 @@ class Sitemap
      * Return list of posts in the categories
      *
      * @param bool $is_title_displayed
-     * @return str $return
+     * @return string $return
      */
     public function returnContentTypeTag($is_title_displayed = true, $display_nofollow = false)
     {
@@ -447,7 +429,7 @@ class Sitemap
      * Return list of archives
      *
      * @param bool $is_title_displayed
-     * @return str $return
+     * @return string $return
      */
     public function returnContentTypeArchive($is_title_displayed = true, $display_nofollow = false)
     {
@@ -489,7 +471,7 @@ class Sitemap
      * @param bool $is_title_displayed
      * @param bool $display_nofollow
      * @param text $sort
-     * @return str $return
+     * @return string $return
      */
     public function returnContentTypeAuthor($is_title_displayed = true, $display_nofollow = false, $sort = null)
     {
@@ -535,8 +517,8 @@ class Sitemap
      *
      * @param bool $is_title_displayed
      * @param bool $display_nofollow
-     * @param str $wsp_exclude_pages
-     * @return str $return
+     * @param string $wsp_exclude_pages
+     * @return string $return
      */
     public function returnContentTypeCptLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages)
     {
@@ -546,7 +528,7 @@ class Sitemap
         $moj_settings = get_option('moj_component_settings');
 
         //add check if settings array is set (as this requires save on components settings page)
-        if(is_array($moj_settings)){
+        if (is_array($moj_settings)) {
             $options = $moj_settings;
         }
 
@@ -596,11 +578,11 @@ class Sitemap
      *
      * @param bool $is_title_displayed
      * @param bool $display_nofollow
-     * @param str $cpt
-     * @param str $post_type
-     * @param str $wsp_exclude_pages
-     * @param str $sort
-     * @return str $return
+     * @param stringing $cpt
+     * @param stringing $post_type
+     * @param stringing $wsp_exclude_pages
+     * @param stringing $sort
+     * @return string $return
      */
     public function returnContentTypeCptItems($is_title_displayed = true, $display_nofollow = false, $cpt, $post_type, $wsp_exclude_pages, $sort = null)
     {
@@ -624,8 +606,7 @@ class Sitemap
         // change the sort order
         if ($sort !== null) {
             $args['orderby'] = $sort;
-        }
-        else {
+        } else {
             $args['orderby'] = 'title';
             $args['order'] = 'ASC';
         }
@@ -666,8 +647,8 @@ class Sitemap
      *
      * @param bool $is_title_displayed
      * @param bool $display_nofollow
-     * @param str $wsp_exclude_pages
-     * @return str $return
+     * @param string $wsp_exclude_pages
+     * @return string $return
      */
     public function returnContentTypeTaxonomiesLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages)
     {
@@ -677,7 +658,7 @@ class Sitemap
         $moj_settings = get_option('moj_component_settings');
 
         //add check if settings array is set (as this requires save on components settings page)
-        if(is_array($moj_settings)){
+        if (is_array($moj_settings)) {
             $options = $moj_settings;
         }
 
@@ -725,8 +706,8 @@ class Sitemap
      * @param bool $is_title_displayed
      * @param bool $display_nofollow
      * @param object $taxonomy_obj
-     * @param str $wsp_exclude_pages
-     * @return str $return
+     * @param string $wsp_exclude_pages
+     * @return string $return
      */
     public function returnContentTypeTaxonomyItems($is_title_displayed = true, $display_nofollow = false, $taxonomy_obj, $wsp_exclude_taxonomy)
     {
@@ -775,8 +756,8 @@ class Sitemap
     /**
      * Add nofollow attribute to the links of the wp_list_pages() functions
      *
-     * @param str $output content
-     * @return str
+     * @param string $output content
+     * @return string
      */
     public function addNoFollow($output)
     {
