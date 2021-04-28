@@ -15,18 +15,20 @@ class Security
 
         // init vulnerability check
         new VulnerabilityDB();
+
+        // init REST API filter
+        new FilterRestAPI();
     }
 
     public function hooks()
     {
-        add_filter('sanitize_file_name',  [$this, 'removeFilenameBadChars'], 10);
+        add_filter('sanitize_file_name', [$this, 'removeFilenameBadChars'], 10);
     }
 
-    public static function removeFilenameBadChars($filename) {
-
-        $bad_chars = array( '–', '#', '~', '%', '|', '^', '>', '<', '['. ']', '{', '}');
+    public static function removeFilenameBadChars($filename)
+    {
+        $bad_chars = array('–', '#', '~', '%', '|', '^', '>', '<', '[' . ']', '{', '}');
         $filename = str_replace($bad_chars, "-", $filename);
         return $filename;
-
     }
 }
