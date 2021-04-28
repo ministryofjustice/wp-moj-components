@@ -7,7 +7,7 @@
  * Author URI:        http://www.tikweb.dk/
  */
 
-namespace component\Users;
+namespace MOJComponents\Users;
 
 class UserSwitch
 {

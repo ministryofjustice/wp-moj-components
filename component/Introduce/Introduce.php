@@ -9,9 +9,7 @@
  * This class includes a dashboard widget and a popup
  */
 
-namespace component;
-
-use component\Introduce\Popup as Popup;
+namespace MOJComponents\Introduce;
 
 class Introduce
 {
@@ -19,8 +17,11 @@ class Introduce
 
     public function __construct()
     {
+        global $mojHelper;
+        $this->helper = $mojHelper;
+
         $this->actions();
-        $this->helper = new Helper();
+
 
         // add popup
         $this->popup();

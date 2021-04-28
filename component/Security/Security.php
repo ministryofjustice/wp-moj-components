@@ -1,14 +1,10 @@
 <?php
 
-namespace component;
-
-use component\Security\VulnerabilityDB as VulnerabilityDB;
+namespace MOJComponents\Security;
 
 class Security
 {
     public $helper;
-
-    public $vulndb = null;
 
     public function __construct()
     {
@@ -16,17 +12,14 @@ class Security
         $this->helper = $mojHelper;
 
         $this->hooks();
-        $this->vulndb();
+
+        // init vulnerability check
+        new VulnerabilityDB();
     }
 
     public function hooks()
     {
         add_filter('sanitize_file_name',  [$this, 'removeFilenameBadChars'], 10);
-    }
-
-    public static function vulndb()
-    {
-        return new VulnerabilityDB();
     }
 
     public static function removeFilenameBadChars($filename) {
@@ -36,5 +29,4 @@ class Security
         return $filename;
 
     }
-
 }

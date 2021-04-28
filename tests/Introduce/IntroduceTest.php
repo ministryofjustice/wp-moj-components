@@ -6,9 +6,8 @@
  * Time: 16:16
  */
 
-namespace component;
+namespace MOJComponents\Introduce;
 
-use component\Introduce\Popup;
 use WP_Mock;
 
 class IntroduceTest extends WP_Mock\Tools\TestCase

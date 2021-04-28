@@ -6,7 +6,7 @@
  * Time: 13:07
  */
 
-namespace component;
+namespace MOJComponents\Helper;
 
 use WP_Mock;
 

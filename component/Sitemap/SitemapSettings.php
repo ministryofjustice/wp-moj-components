@@ -1,8 +1,6 @@
 <?php
 
-namespace component\Sitemap;
-
-use component\Sitemap as Sitemap;
+namespace MOJComponents\Sitemap;
 
 class SitemapSettings extends Sitemap
 {

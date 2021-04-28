@@ -6,10 +6,10 @@
  * Time: 11:34
  */
 
-namespace component;
+namespace MOJComponents\AdminSettings;
 
 use WP_Mock;
-use component\Security\VulnerabilityDBSettings;
+use MOJComponents\Security\VulnerabilityDBSettings;
 
 class AdminSettingsTest extends WP_Mock\Tools\TestCase
 {

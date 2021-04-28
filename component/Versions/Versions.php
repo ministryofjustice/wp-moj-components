@@ -7,9 +7,7 @@
  * Time: 11:06
  */
 
-namespace component;
-
-use component\Versions\Plugins as Plugins;
+namespace MOJComponents\Versions;
 
 /**
  * Returns version data specific to WordPress.

@@ -6,7 +6,7 @@
  * Time: 13:07
  */
 
-namespace component;
+namespace MOJComponents\Versions;
 
 use WP_Mock;
 

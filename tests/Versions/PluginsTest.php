@@ -6,9 +6,8 @@
  * Time: 16:16
  */
 
-namespace component;
+namespace MOJComponents\Versions;
 
-use component\Versions\Plugins;
 use WP_Mock;
 
 define('DAY_IN_SECONDS', 123456789);

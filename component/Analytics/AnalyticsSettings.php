@@ -1,8 +1,6 @@
 <?php
 
-namespace component\Analytics;
-
-use component\Analytics as Analytics;
+namespace MOJComponents\Analytics;
 
 class AnalyticsSettings extends Analytics
 {

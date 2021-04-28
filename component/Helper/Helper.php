@@ -6,7 +6,7 @@
  * Time: 13:56
  */
 
-namespace component;
+namespace MOJComponents\Helper;
 
 /**
  * Contains useful methods
@@ -200,6 +200,6 @@ class Helper
  */
 function moj_get_page_uri()
 {
-    $helper = new Helper();
-    return $helper->getPageUrl();
+    global $mojHelper;
+    return $mojHelper->getPageUrl();
 }

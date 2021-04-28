@@ -1,9 +1,6 @@
 <?php
 
-namespace component;
-
-use component\Users\UsersSettings as Settings;
-use component\Users\UserSwitch as UserSwitch;
+namespace MOJComponents\Users;
 
 class Users
 {
@@ -27,7 +24,9 @@ class Users
 
     public function __construct()
     {
-        $this->helper = new Helper();
+        global $mojHelper;
+        $this->helper = $mojHelper;
+
         // make sure cron can pick this up
         $this->addSchedule();
         $this->actions();
@@ -47,7 +46,7 @@ class Users
         add_action('moj_check_user_activity', [$this, 'inactiveUsers']);
 
         // settings section
-        add_action('wp_loaded', [new Settings(), 'settings'], 1);
+        add_action('wp_loaded', [new UsersSettings(), 'settings'], 1);
     }
 
     public function enqueue()

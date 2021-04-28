@@ -6,9 +6,9 @@
  * Time: 14:19
  */
 
-namespace component\Introduce;
+namespace MOJComponents\Introduce;
 
-class PopupSettings extends \component\Introduce\Popup
+class PopupSettings extends Popup
 {
     public $helper;
 
@@ -71,8 +71,14 @@ class PopupSettings extends \component\Introduce\Popup
     public function settingsSectionCB()
     {
         echo __(
-            'Enter a title and message here that will appear in the notification banner. Once you save your changes the banner will display.',
+            'Enter a title and message here that will appear in the notification banner. Check your layout in the example below.',
             'wp-moj-components'
         );
+
+        // load messages
+        $this->messages();
+
+        // output sample banner
+        echo $this->content(true);
     }
 }
