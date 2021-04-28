@@ -12,11 +12,23 @@ Components within this plugin attempt to create a baseline standard that all MoJ
 
 ### Current components
 
-1. **Versions**:
-*grants access to WordPress version over API and is intended to provide installed plugin and theme versions in the near future*
+1. **Introduce**: *creates a Dashboard widget containing contact information so stakeholders can get support*  
 
-2. **Introduce**:
-*creates a Dashboard widget with contact information for the JotW team* 
+2. **Introduce _(popup)_**: *provides a popup banner to relay administrative information to stakeholders* 
+
+3. **Multisite**: *adds support for multisite based environments* 
+
+4. **Multisite _(domain tracker)_**: *a non destructive custom domain tracker, provided primarily for the WASM tool.* 
+
+5. **Security**: *applies scanning functionality and various security patches*
+ 
+6. **Security _(rest-api)_**: *prevents access to specified REST API routes*
+
+7. **Sitemap**: *provides auto-generated sitemap functionality and shortcodes*
+
+8. **Users**: *introduces user-switch capability for admins plus monitors inactive users for GDPR*
+
+9. **Versions**: *grants access to WordPress version over API and provides information relating to installed plugin and theme versions*
 
 ------
 
@@ -26,12 +38,12 @@ Require the plugin in your composer.json file and always use the latest version:
 
 `"ministryofjustice/wp-moj-components": "*"`
 
-*Should load the plugin in the mu-plugins directory when you run `composer update `.*
+*Load the plugin in the mu-plugins directory when you run `composer update `.*
 
 ### How it works
-Inside the directory named 'components' are sub-directories that represent individual functionality. These are called '**components**'.
+Inside the directory named 'component' are sub-directories that represent individual functionality. These are called '**components**'.
 
-Each component is stand-alone and contains it's own assets and code. Components are loaded automatically by a system loader if they the component directory name matches the class.php within.
+Each component is stand-alone and contains its own assets and code. Components load automatically using the `composer` PSR4 autoloader.
 
 Other conventions include:
 
@@ -42,7 +54,7 @@ Other conventions include:
   - `js/`
 - Components can store sub-classes in a directory called `sub/` for auto-loading
 
-You have access to a `Helper` class within the components directory that provides solutions to paths and offers an easy way to keep inter-common code and functions organised.
+You have access to a `Helper` class within the component directory that provides solutions to paths and offers an easy way to keep inter-common code and functions organised.
 
 You can access this class and it's methods from any component with the following function call:
 
@@ -84,19 +96,19 @@ Create your component using the following structure.
 ```php
 <?php
 
-namespace component;
+namespace MOJComponents\Feature;
 
 /**
  * A great description about what this feature does
  */
-class Feature
+class FeatureClass
 {
     public  function __construct()
     {
-        $this->add_actions();
+        $this->actions();
     }
 
-    private function add_actions()
+    private function actions()
     {
         // hooks in here
     }
