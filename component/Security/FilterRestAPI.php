@@ -30,8 +30,6 @@ class FilterRestAPI
             return $this->getWPError($result);
         }
 
-        // Our custom authentication check should have no effect
-        // on logged-in requests
         return $result;
     }
 
@@ -42,11 +40,11 @@ class FilterRestAPI
      */
     private function getCurrentRoute(): string
     {
-        $rest_route = $GLOBALS['wp']->query_vars['rest_route'];
+        $restRoute = $GLOBALS['wp']->query_vars['rest_route'];
 
-        return (empty($rest_route) || '/' == $rest_route) ?
-            $rest_route :
-            untrailingslashit($rest_route);
+        return (empty($restRoute) || '/' == $restRoute) ?
+            $restRoute :
+            untrailingslashit($restRoute);
     }
 
 
@@ -76,14 +74,14 @@ class FilterRestAPI
      */
     private function getWPError($access)
     {
-        $error_message = esc_html__('Only authenticated users can access the REST API.');
+        $errorMessage = esc_html__('Only authenticated users can access the REST API.');
 
         if (is_wp_error($access)) {
-            $access->add('rest_cannot_access', $error_message, array('status' => rest_authorization_required_code()));
+            $access->add('rest_cannot_access', $errorMessage, array('status' => rest_authorization_required_code()));
 
             return $access;
         }
 
-        return new WP_Error('rest_cannot_access', $error_message, array('status' => rest_authorization_required_code()));
+        return new WP_Error('rest_cannot_access', $errorMessage, array('status' => rest_authorization_required_code()));
     }
 }
