@@ -2,6 +2,8 @@
 
 namespace MOJComponents\Security;
 
+use WP_Error;
+
 class FilterRestAPI
 {
     /**
