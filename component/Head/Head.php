@@ -24,7 +24,7 @@ class Head
     /**
      * @var string
      */
-    public $addHeadElement;
+    public $headElement;
 
     public function __construct()
     {
@@ -33,7 +33,7 @@ class Head
         $this->actions();
 
         $options = get_option('moj_component_settings');
-        $this->addHeadElement = $options['head_element'] ?? '';
+        $this->headElement = $options['head_element'] ?? '';
     }
 
     public function actions()
@@ -43,13 +43,13 @@ class Head
     }
 
     /**
-     * Add meta
+     * Print into head inputed element/code
      *
      */
     public function loadHeadElement()
     {
-        if (!empty($this->addHeadElement)) {
-            echo $this->addHeadElement;
+        if (!empty($this->headElement)) {
+            echo $this->headElement;
         }
     }
 }

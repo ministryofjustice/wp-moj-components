@@ -34,11 +34,11 @@ class HeadSettings extends Head
     public function addHeadElement()
     {
         $options = get_option('moj_component_settings');
-        $addHeadElement = $options['head_element'] ?? '';
+        $headElement = $options['head_element'] ?? '';
 
         ?>
         <input type='text' name='moj_component_settings[head_element]'
-        placeholder="For example, add <meta> element" value='<?php echo $addHeadElement; ?>'
+        placeholder="For example, add <meta> element" value='<?php echo $headElement; ?>'
         class="moj-component-input">
         <?php
     }
