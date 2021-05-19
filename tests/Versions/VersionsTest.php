@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -14,13 +15,13 @@ class VersionsTest extends WP_Mock\Tools\TestCase
 {
     public $versions;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         \WP_Mock::setUp();
         $this->versions = new Versions();
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         \WP_Mock::tearDown();
         $this->versions = null;

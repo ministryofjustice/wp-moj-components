@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Code based on:
@@ -23,19 +24,19 @@ class UserSwitch
         $this->helper = $mojHelper;
 
         add_action('init', array($this, 'init'));
-
-
-    }//End of __construct
+    }
 
     public function init()
     {
 
         $options = get_option('moj_component_settings');
 
-        if(empty($options['user_switch_active']) == false) {
+        if (empty($options['user_switch_active']) == false) {
             $this->hooks();
 
-            if (!$this->roleCanImpersonate()) return;
+            if (!$this->roleCanImpersonate()) {
+                return;
+            }
 
             if (isset($_GET['impersonate']) && !empty($_GET['impersonate'])) {
                 $this->impersonate($_GET['impersonate']);
@@ -57,12 +58,13 @@ class UserSwitch
         add_action('wp_ajax_userswitch_user_search', array($this, 'ajaxUserSearch'));
         add_action('wp_ajax_nopriv_userswitch_user_search', array($this, 'ajaxUserSearch'));
 
-        if (!$this->roleCanImpersonate()) return;
+        if (!$this->roleCanImpersonate()) {
+            return;
+        }
 
         // Add a column to the user list table which will allow you to impersonate that user
         add_filter('manage_users_columns', array($this, 'userTableColumns'));
         add_action('manage_users_custom_column', array($this, 'userTableColumnsValue'), 10, 3);
-
     }
 
     /**
@@ -82,7 +84,7 @@ class UserSwitch
      * @param Integer $user_id - The ID of the user to return the value for
      * @return String
      */
-    function userTableColumnsValue($value, $column, $user_id)
+    public function userTableColumnsValue($value, $column, $user_id)
     {
         switch ($column) {
             case 'usw_Impersonate':
@@ -141,16 +143,13 @@ class UserSwitch
         } else {
             update_user_meta($user_id, 'switchuser_recent_imp_users', $recent_user_opt, '');
         }
-
-    }//End saveRecentUser
+    }
 
     /**
      * Get get user id and switch to
      */
     public function impersonate($user_id)
     {
-
-
         global $current_user;
 
         $block_attempt = false;
@@ -158,17 +157,13 @@ class UserSwitch
         $user = get_userdata($user_id);
 
         if ($user == false) {
-
             $block_attempt = true;
-
         }
 
         if (!current_user_can('manage_options')) {
-
             if (in_array('administrator', (array)$user->roles)) {
                 $block_attempt = true;
             }
-
         }
 
         if ($block_attempt === true) {
@@ -195,27 +190,21 @@ class UserSwitch
         }//End if
 
         if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
-
             $redirect_url = $_SERVER['HTTP_REFERER'];
 
             if (strpos($redirect_url, '/wp-admin/') != false) {
                 $redirect_url = admin_url();
             }
-
         } else {
-
             $redirect_url = admin_url();
-
         }
 
         // add impersonatting param with url to detect this request is impersonatting.
         $redirect_url = $redirect_url . '?imp=true';
 
-
         wp_redirect($redirect_url);
         exit;
-
-    }//End impersonate
+    }
 
     /**
      * Switch back to old user
@@ -237,7 +226,7 @@ class UserSwitch
             wp_redirect($redirect_url);
             exit;
         }
-    }//End unimpersonate
+    }
 
     /**
      * Get impersonated user from cookie
@@ -251,7 +240,7 @@ class UserSwitch
         } else {
             return false;
         }
-    }//impersonatedBy
+    }
 
     /**
      * Change logout text
@@ -268,7 +257,7 @@ class UserSwitch
             );
             $wp_admin_bar->add_node($args);
         }
-    }//End changeLogoutText
+    }
 
     /**
      * Encript and Decrypt
@@ -292,11 +281,11 @@ class UserSwitch
         if ($action == 'encrypt') {
             $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
             $output = base64_encode($output);
-        } else if ($action == 'decrypt') {
+        } elseif ($action == 'decrypt') {
             $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
         }
         return $output;
-    }// End encryptDecrypt
+    }
 
     /**
      * plugin script to be enqueued in admin and frontend.
@@ -330,7 +319,6 @@ class UserSwitch
 
         if (!empty($opt)) {
             foreach ($opt as $key => $value) {
-
                 $user_role_display = '';
 
                 $user = explode('&', $value);
@@ -343,7 +331,6 @@ class UserSwitch
                 if (!empty($user_name) && !empty($user_role)) {
                     $user_role_display = sprintf('( %s )', $user_role);
                 } else {
-
                     $rc = explode('-', $user_role);
                     $rc = array_map('trim', $rc);
                     $rc = array_filter($rc);
@@ -362,8 +349,6 @@ class UserSwitch
                 }
 
                 $ret .= '<a href="' . admin_url("?impersonate=$user_id") . '">' . $user_name . ' ' . $user_role_display . ' ' . $last_login_date . '</a>' . PHP_EOL;
-
-
             }
         }
 
@@ -394,7 +379,6 @@ class UserSwitch
         if (current_user_can('edit_users') || current_user_can('list_users')) {
             return true;
         }
-
     }
 
     public function roleCanImpersonate()
@@ -414,8 +398,6 @@ class UserSwitch
         $settings = get_option('fus_settings');
 
         if (isset($settings['fus_roles']) && !empty($settings['fus_roles'])) {
-
-
             $cur_user_roles = (array)$cur_user->roles;
             $matched = array_intersect($cur_user_roles, $settings['fus_roles']);
 
@@ -424,11 +406,9 @@ class UserSwitch
             } else {
                 return false;
             }
-
         } else {
             return false;
         }
-
     }
 
 
@@ -440,12 +420,10 @@ class UserSwitch
 
         // if admin_bar is showing.
         if (is_admin_bar_showing()) {
-
             global $wp_admin_bar;
 
             // if current user can edit_users than he can see this.
             if ($this->roleCanImpersonate()) {
-
                 $wp_admin_bar->add_menu(
                     array(
                         'id' => 'tikemp_impresonate_user',
@@ -475,10 +453,8 @@ class UserSwitch
                         'title' => $html,
                     )
                 );
-
-            }//if(current_user_can('manage_optiona'))
-
-        }//if(is_admin_bar_showing())
+            }
+        }
     }
 
     /**
@@ -513,13 +489,10 @@ class UserSwitch
         $site_roles = $this->getRoles();
 
         if (!empty($user_query->results)) {
-
             foreach ($user_query->results as $user) {
-
                 if ($user->ID == get_current_user_id()) {
                     continue;
                 }
-
 
                 $name_display = $user->first_name . ' ' . $user->last_name;
                 $user_role_display = ' (' . $site_roles[array_shift($user->roles)] . ' - ' . $user->user_login . ')';
@@ -539,7 +512,7 @@ class UserSwitch
      * Get site user roles
      * @return array array of roles and capabilities.
      */
-    function getRoles()
+    public function getRoles()
     {
 
         $all_roles = wp_roles()->roles;
@@ -564,5 +537,4 @@ class UserSwitch
 
         return $ret;
     }
-
-} // Class end
+}

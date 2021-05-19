@@ -94,7 +94,7 @@ class Sitemap
         if (array_key_exists('sitemap_exclude_pages', $options)) {
             $wsp_exclude_pages = trim($options['sitemap_exclude_pages']);
         }
-        
+
         $wsp_is_exclude_password_protected = $options['sitemap_exclude_password_protected'] ?? '';
 
         // Determine if the posts should be displayed multiple time if it is in multiple category
@@ -105,7 +105,6 @@ class Sitemap
 
         // Exclude pages, posts and CTPs protected by password
         if ($wsp_is_exclude_password_protected == 1) {
-
             global $wpdb;
 
             // Obtain the password protected content
@@ -167,7 +166,7 @@ class Sitemap
                 }
             // end
         }
-        
+
         if ($return) {
             return $return;
         }
@@ -520,7 +519,7 @@ class Sitemap
      * @param string $wsp_exclude_pages
      * @return string $return
      */
-    public function returnContentTypeCptLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages)
+    public function returnContentTypeCptLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages = '')
     {
 
         $options = [];
@@ -551,16 +550,14 @@ class Sitemap
 
         // list all the CPT
         foreach ($post_types as $post_type) {
-
             // extract CPT object
             $cpt = get_post_type_object($post_type);
 
             $exclude = '';
+
             if (array_key_exists('sitemap_exclude_cpt_' . $cpt->name, $options)) {
                 // Is this CPT already excluded ?
-
                 $exclude = $options['sitemap_exclude_cpt_' . $cpt->name];
-
             }
 
             if (empty($exclude)) {
@@ -584,7 +581,7 @@ class Sitemap
      * @param stringing $sort
      * @return string $return
      */
-    public function returnContentTypeCptItems($is_title_displayed = true, $display_nofollow = false, $cpt, $post_type, $wsp_exclude_pages, $sort = null)
+    public function returnContentTypeCptItems($is_title_displayed = true, $display_nofollow = false, $cpt = '', $post_type = '', $wsp_exclude_pages = '', $sort = null)
     {
         // init
         $return = '';
@@ -620,7 +617,6 @@ class Sitemap
         // List all the results
         if (!empty($posts_cpt)) {
             foreach ($posts_cpt as $post_cpt) {
-
                 $post_link = apply_filters('wsp_cpt_link', get_permalink($post_cpt->ID), $post_cpt);
 
                 $list_pages .= '<li><a href="' . $post_link . '"' . $attr_nofollow . '>' . $post_cpt->post_title . '</a></li>' . "\n";
@@ -650,9 +646,8 @@ class Sitemap
      * @param string $wsp_exclude_pages
      * @return string $return
      */
-    public function returnContentTypeTaxonomiesLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages)
+    public function returnContentTypeTaxonomiesLists($is_title_displayed = true, $display_nofollow = false, $wsp_exclude_pages = '')
     {
-
         $options = [];
 
         $moj_settings = get_option('moj_component_settings');
@@ -678,13 +673,11 @@ class Sitemap
 
         // list all the taxonomies
         foreach ($taxonomies_names as $taxonomy_name) {
-
             // Extract
             $taxonomy_obj = get_taxonomy($taxonomy_name);
 
             $exclude = '';
             if (array_key_exists('sitemap_exclude_taxonomy_' . $taxonomy_name, $options)) {
-
                 // Is this taxonomy already excluded ?
                 $exclude = $options['sitemap_exclude_taxonomy_' . $taxonomy_name];
             }
@@ -692,7 +685,6 @@ class Sitemap
             if (empty($exclude)) {
                 $return .= $this->returnContentTypeTaxonomyItems($is_title_displayed, $display_nofollow, $taxonomy_obj, $exclude);
             }
-
         }
 
         // return content
@@ -709,7 +701,7 @@ class Sitemap
      * @param string $wsp_exclude_pages
      * @return string $return
      */
-    public function returnContentTypeTaxonomyItems($is_title_displayed = true, $display_nofollow = false, $taxonomy_obj, $wsp_exclude_taxonomy)
+    public function returnContentTypeTaxonomyItems($is_title_displayed = true, $display_nofollow = false, $taxonomy_obj = null, $wsp_exclude_taxonomy = '')
     {
 
         // init
@@ -763,6 +755,4 @@ class Sitemap
     {
         return str_replace('<a href=', '<a rel="nofollow" href=', $output);
     }
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -14,14 +15,14 @@ class HelperTest extends WP_Mock\Tools\TestCase
 {
     public $helper;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         \WP_Mock::setUp();
         \WP_Mock::passthruFunction('esc_url');
         $this->helper = new Helper();
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         \WP_Mock::tearDown();
         $this->helper = null;

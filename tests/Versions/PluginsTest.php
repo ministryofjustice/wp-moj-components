@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -16,13 +17,13 @@ class PluginsTest extends WP_Mock\Tools\TestCase
 {
     public $plugins;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         \WP_Mock::setUp();
         $this->plugins = new Plugins();
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         \WP_Mock::tearDown();
         $this->plugins = null;
