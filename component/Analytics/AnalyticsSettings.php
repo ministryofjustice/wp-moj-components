@@ -38,14 +38,16 @@ class AnalyticsSettings extends Analytics
 
         ?>
         <input type='text' name='moj_component_settings[gtm_analytics_id]'
-        placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleTagManagerID); ?>' 
+        placeholder="GTM-XXXXXXX" value='<?php echo sanitize_html_class($googleTagManagerID); ?>'
         class="moj-component-input">
         <?php
 
         // Run a few basic checks (mainly for devs in case of C&P typos)
 
         // Check if empty string stop rest of checks.
-        if ($googleTagManagerID === '') return;
+        if ($googleTagManagerID === '') {
+            return;
+        }
 
         // Remove whitespace, tabs & line ends.
         $googleTagManagerID = preg_replace('/\s+/', '', $googleTagManagerID);
@@ -68,13 +70,12 @@ class AnalyticsSettings extends Analytics
         ?>
         <div class="welcome-panel-column">
             <h4><?php _e('Google Tag Manager (GTM)', 'wp_analytics_page') ?></h4>
-            <p style="max-width: 600px"><?php _e('Analytic tracking on our site is done through GTM. 
+            <p style="max-width: 600px"><?php _e('Analytic tracking on our site is done through GTM.
             First setup a GTM account and then add the GTM container ID below and save.
-            This will add GTM code to the site. You can find the eleven charactor GTM ID, by logining into your GTM account, 
+            This will add GTM code to the site. You can find the eleven charactor GTM ID, by logining into your GTM account,
             in the top right corner of the dashboard.<br><br>If no GTM ID is added, no code is loaded on the page.', 'wp_analytics_page'); ?></p>
             <h4><?php _e('Google Analytics (GA)', 'wp_analytics_page') ?></h4>
-            <p style="max-width: 600px"><?php _e('Add Google Analytics or any other tracker, via the GTM dashboard.', 
-            'wp_analytics_page'); ?></p>
+            <p style="max-width: 600px"><?php _e('Add Google Analytics or any other tracker, via the GTM dashboard.', 'wp_analytics_page'); ?></p>
         </div>
         <?php
     }

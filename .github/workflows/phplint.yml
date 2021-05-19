@@ -2,9 +2,9 @@ name: PHP linting and CS
 
 on:
   push:
-    branches: [ main ]
+    branches: [ lint ]
   pull_request:
-    branches: [ main ]
+    branches: [ lint ]
 
 jobs:
   build:

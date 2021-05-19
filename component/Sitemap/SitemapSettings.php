@@ -72,7 +72,6 @@ class SitemapSettings extends Sitemap
 
         // list all the CPT
         foreach ($post_types as $post_type) {
-
             // extract CPT object
             $cpt = get_post_type_object($post_type);
 
@@ -95,7 +94,6 @@ class SitemapSettings extends Sitemap
 
         // list all the taxonomies
         foreach ($taxonomies_names as $taxonomy_name) {
-
             // Extract
             $taxonomy_obj = get_taxonomy($taxonomy_name);
 
