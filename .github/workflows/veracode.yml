@@ -1,0 +1,36 @@
+name: Veracode scan
+# Veracode GA docs https://github.com/marketplace/actions/veracode-upload-and-scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
+  build-and-security-scan:
+    # The type of runner that the job will run on.
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checks-out your repository under $GITHUB_WORKSPACE
+    # Zip repo files to prepare for Veracode
+    - uses: actions/checkout@v2
+    - name: Package target repo files for Veracode scanning
+      run: zip -r target.zip . -x ".git/*" ".github/*" "vendor/"
+
+    # Upload and Scan with Veracode
+    - name: Veracode upload and scan
+      uses: veracode/veracode-uploadandscan-action@master
+      id: upload_and_scan
+      with:
+        appname: '${{ github.repository }}'
+        version: '${{ github.run_id }}'
+        createprofile: 'true'
+        filepath: 'target.zip'
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
+        scantimeout: 15
+        criticality: 'Medium'
