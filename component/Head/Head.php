@@ -24,7 +24,7 @@ class Head
     /**
      * @var string
      */
-    public $addHeadTag;
+    public $addHeadElement;
 
     public function __construct()
     {
@@ -33,23 +33,23 @@ class Head
         $this->actions();
 
         $options = get_option('moj_component_settings');
-        $this->addHeadTag = $options['head_tag'] ?? '';
+        $this->addHeadElement = $options['head_element'] ?? '';
     }
 
     public function actions()
     {
         add_action('wp_loaded', [$this->settings, 'settings'], 1);
-        add_action('wp_head', [$this,'loadHeadTag']);
+        add_action('wp_head', [$this,'loadHeadElement']);
     }
 
     /**
      * Add meta
      *
      */
-    public function loadHeadTag()
+    public function loadHeadElement()
     {
-        if (!empty($this->addHeadTag)) {
-            echo $this->addHeadTag;
+        if (!empty($this->addHeadElement)) {
+            echo $this->addHeadElement;
         }
     }
 }
