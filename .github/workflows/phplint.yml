@@ -1,7 +1,10 @@
 name: PHP linting and CS
 
-on: push
-
+on:
+  push:
+    branches: [ lint ]
+  pull_request:
+    branches: [ lint ]
 
 jobs:
   build:
