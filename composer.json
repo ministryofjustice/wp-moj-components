@@ -2,13 +2,15 @@
   "name": "ministryofjustice/wp-moj-components",
   "description": "A plugin to introduce global functions to a collection of WP sites",
   "type": "wordpress-muplugin",
+  "license": "MIT",
   "require": {
     "composer/installers": "^1.0"
   },
   "require-dev": {
     "10up/wp_mock": "0.4.2",
     "phpmd/phpmd": "^2.7",
-    "squizlabs/php_codesniffer": "^3.5"
+    "composer/composer": "*",
+    "squizlabs/php_codesniffer": "*"
   },
   "scripts": {
     "phpcs-config-set" : "phpcs --config-set ignore_warnings_on_exit 1",
@@ -40,22 +42,4 @@
       "email": "wordpress@digital.justice.gov.uk"
     }
   ]
-}
-
-{
-  "name": "ministryofjustice/wp-moj-blocks",
-  "description": "WP plugin that adds addtional blocks.",
-  "type": "wordpress-plugin",
-  "license": "MIT",
-  "minimum-stability": "dev",
-  "require": {},
-  "require-dev": {
-      "composer/composer": "*",
-      "squizlabs/php_codesniffer": "*"
-  },
-  "scripts": {
-      "phpcs-config-set" : "phpcs --config-set ignore_warnings_on_exit 1",
-      "phpcs": "phpcs --extensions=php --ignore=*/vendor/* --standard=PSR12 .",
-      "phpcbf": "phpcbf --extensions=php --ignore=*/vendor/* --standard=PSR12 ."
-  }
 }
