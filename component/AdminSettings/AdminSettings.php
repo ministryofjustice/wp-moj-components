@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: damienwilson
@@ -53,7 +54,7 @@ class AdminSettings
         wp_admin_css_color(
             'moj_dt',
             __('MoJ Digital & Technology', 'wp-moj-components'),
-            $this->helper->cssPath(__FILE__) .'scheme/moj-dt/colours.css',
+            $this->helper->cssPath(__FILE__) . 'scheme/moj-dt/colours.css',
             [ '#0b0c0c', '#626a6e', '#2c5d94', '#1d70b8' ]
         );
     }
