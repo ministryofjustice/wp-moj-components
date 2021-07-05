@@ -42,9 +42,15 @@ class Plugins
     public function set(array $plugins)
     {
         $structure = [];
-        foreach ($plugins as $plugin) {
-            if (!empty($plugin['Author'])) {
-                $structure[$plugin['TextDomain']] = $plugin['Version'];
+        foreach ($plugins as $plugin_key => $plugin ) {
+
+            strpos($plugin_key, '/');
+
+            if(!empty(strpos($plugin_key, '/'))){
+
+                $plugin_slug = substr($plugin_key, 0, strpos($plugin_key, '/'));
+                $structure[$plugin_slug] = $plugin['Version'];
+
             }
         }
 
