@@ -3,7 +3,7 @@
         'name' => 'ministryofjustice/wp-moj-components',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'bc735aaab6ee2d67e6afed2fad6399ecf9accf05',
+        'reference' => '2e05aa99ea552797ebefc79ebb21715db41ad642',
         'type' => 'wordpress-muplugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -148,7 +148,7 @@
         'ministryofjustice/wp-moj-components' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'bc735aaab6ee2d67e6afed2fad6399ecf9accf05',
+            'reference' => '2e05aa99ea552797ebefc79ebb21715db41ad642',
             'type' => 'wordpress-muplugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
