@@ -8,6 +8,6 @@
 # Composer
 vendor/*
 !vendor/autoload.php
-!vendor/composer/*
+!vendor/composer
 !vendor/.gitkeep
 meta/
