@@ -7,5 +7,7 @@
 
 # Composer
 vendor/*
+!vendor/autoload.php
+!vendor/composer/*
 !vendor/.gitkeep
 meta/

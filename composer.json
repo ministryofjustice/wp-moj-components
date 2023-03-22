@@ -41,5 +41,10 @@
       "name": "Adam Brown",
       "email": "wordpress@digital.justice.gov.uk"
     }
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
 }

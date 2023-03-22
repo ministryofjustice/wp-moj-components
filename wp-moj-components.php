@@ -24,6 +24,8 @@ namespace MOJComponents;
 
 defined('ABSPATH') || exit;
 
+include 'vendor/autoload.php';
+
 use MOJComponents\Helper\Helper;
 use MOJComponents\AdminSettings\AdminSettings;
 use MOJComponents\Introduce\Introduce;
