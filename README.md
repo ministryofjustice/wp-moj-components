@@ -3,7 +3,7 @@ A plugin to manage commonly used functionality across the MoJ portfolio of WordP
 
 **Why?**
  1. Simple and efficient maintenance approach
- 2. Enforces a baseline standard
+ 2. Enforces a baseline standard.
  3. Centralised repo for common website functions
  4. Time-saving development method due to 'one fix affects all'
  5. Increased website load performance  
