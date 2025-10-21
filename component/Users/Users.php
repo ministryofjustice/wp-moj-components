@@ -187,6 +187,12 @@ class Users
      */
     public function addSchedule()
     {
+        // Is this feature disabled in the settings?
+        $options = get_option('moj_component_settings');
+        if (isset($options['user_active_disable']) && $options['user_active_disable'] === 'yes') {
+            return false;
+        }
+
         $recurrence = get_option('moj_component_settings', array()); // default to monthly
         $recurrence = $recurrence['user_inactive_schedule'] ?? 'monthly';
         $now_recurrence = wp_get_schedule('moj_check_user_activity');
