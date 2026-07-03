@@ -59,6 +59,15 @@ class FilterRestAPI
      */
     private function isRouteAllowed($currentRoute): bool
     {
+        // Allow the core current-user endpoint only. The block editor's
+        // preferences persistence layer requests /wp/v2/users/me on admin page
+        // loads; blocking it causes console 403s and stops editor preferences
+        // persisting to user meta. Anchored to the core wp/vN users/me route so
+        // it can't match other endpoints; user enumeration (/wp/v2/users) stays blocked.
+        if (preg_match('#^/wp/v\d+/users/me$#', $currentRoute)) {
+            return true;
+        }
+
         $disallowed = [
             'user'
         ];
