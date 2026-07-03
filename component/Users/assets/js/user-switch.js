@@ -4,7 +4,7 @@ jQuery('document').ready(function(){
 
 	var form = $('form#userswitch_usearch_form');
 
-	form.submit(function(e) {
+	form.on('submit', function(e) {
 
 		e.preventDefault();
 
@@ -31,8 +31,8 @@ jQuery('document').ready(function(){
 		return false;
 	});
 
-	$('#wp-admin-bar-tikemp_impresonate_user').click(function(){
-		$('input[id="userswitch_username"]').focus();
+	$('#wp-admin-bar-tikemp_impresonate_user').on('click', function(){
+		$('input[id="userswitch_username"]').trigger('focus');
 	});
 
 	$('#switchuser_usearch_result').niceScroll({

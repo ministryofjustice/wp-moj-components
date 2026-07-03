@@ -295,7 +295,7 @@ class UserSwitch
     {
         wp_enqueue_style('userswitch_admin_css', $this->helper->cssPath(__FILE__) . 'main.css', []);
         wp_enqueue_script('userswitch_search_scroll', $this->helper->jsPath(__FILE__) . 'jquery.nicescroll.min.js', array('jquery'), '1.1', true);
-        wp_enqueue_script('userswitch_script', $this->helper->jsPath(__FILE__) . 'user-switch.js', array('jquery', 'userswitch_search_scroll'), '1.2', true);
+        wp_enqueue_script('userswitch_script', $this->helper->jsPath(__FILE__) . 'user-switch.js', array('jquery', 'userswitch_search_scroll'), '1.3', true);
 
         wp_localize_script('userswitch_script', 'ScriptData', array('ajaxurl' => admin_url('admin-ajax.php')));
     }
